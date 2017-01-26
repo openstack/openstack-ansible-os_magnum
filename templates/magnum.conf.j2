@@ -60,6 +60,9 @@ rabbit_virtual_host = {{ magnum_rabbitmq_vhost }}
 rabbit_notification_exchange = magnum
 rabbit_notification_topic = notification
 
+[profiler]
+enabled = false
+
 [trust]
 trustee_domain_admin_password = {{ magnum_trustee_password }}
 trustee_domain_admin_name = {{ magnum_trustee_domain_admin_name }}

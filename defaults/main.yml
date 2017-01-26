@@ -111,6 +111,7 @@ magnum_pip_packages:
   - PyMySQL
   - magnum
   - python-memcached
+  - osprofiler
 
 # This variable is used by the repo_build process to determine
 # which host group to check for members of before building the
