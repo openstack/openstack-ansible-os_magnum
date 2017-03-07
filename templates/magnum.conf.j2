@@ -42,6 +42,8 @@ password = {{ magnum_service_password }}
 #TODO(chris_hultin)
 #Remove once https://bugs.launchpad.net/magnum/+bug/1594888 is closed
 admin_user = {{ magnum_service_user_name }}
+admin_tenant_name = {{ magnum_service_project_name }}
+admin_password = {{ magnum_service_password }}
 
 [magnum_client]
 endpoint_type = internalURL
