@@ -89,13 +89,13 @@ magnum_trustee_domain_admin_roles: ['admin']
 #Glance images
 magnum_glance_images: []
 ## Example Glance Image - Fedora Atomic
-#  - name: fedora-atomic-latest         #Name of the image in Glance
+#  - name: fedora-atomic-ocata          #Name of the image in Glance
 #    disk_format: qcow2                 #Disk format (e.g. qcow2)
 #    image_format: bare                 #Image format
 #    public: true                       #Boolean - is the image public
-#    file: https://fedorapeople.org/groups/magnum/fedora-atomic-latest.qcow2
+#    file: https://fedorapeople.org/groups/magnum/fedora-atomic-ocata.qcow2
 #    distro: fedora-atomic              #Value for the os_distro metadata
-#    checksum: "sha1:dab00359cfa5cd393f0a6044f77c4a78c6167a47"
+#    checksum: "sha1:1f6cde455f9ec1074432cea94b3d6992e873ae69"
 
 magnum_requires_pip_packages:
   - httplib2

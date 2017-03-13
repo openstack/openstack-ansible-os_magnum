@@ -17,13 +17,13 @@ magnum_galera_user: magnum
 magnum_cert_manager_type: x509keypair
 
 magnum_glance_images:
-  - name: fedora-atomic-latest
+  - name: fedora-atomic-ocata
     disk_format: qcow2
     image_format: bare
     public: true
-    file: https://fedorapeople.org/groups/magnum/fedora-atomic-latest.qcow2
+    file: https://fedorapeople.org/groups/magnum/fedora-atomic-ocata.qcow2
     distro: fedora-atomic
-    checksum: "sha1:eba0fa9a8f03de3c646ef7cb080872634497463a"
+    checksum: "sha1:1f6cde455f9ec1074432cea94b3d6992e873ae69"
 
 haproxy_default_services:
   - service:
