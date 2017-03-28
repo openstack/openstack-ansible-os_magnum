@@ -21,6 +21,7 @@
     system_group: "{{ magnum_system_group_name }}"
     service_home: "{{ magnum_system_user_home }}"
     log_directory: "{{ magnum_log_directory }}"
+    init_config_overrides: "{{ magnum_api_init_config_overrides }}"
 
 - include: magnum_init_common.yml
   vars:
@@ -30,3 +31,4 @@
     system_group: "{{ magnum_system_group_name }}"
     service_home: "{{ magnum_system_user_home }}"
     log_directory: "{{ magnum_log_directory }}"
+    init_config_overrides: "{{ magnum_conductor_init_config_overrides }}"

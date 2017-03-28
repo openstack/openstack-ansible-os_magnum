@@ -111,3 +111,6 @@ magnum_pip_packages:
 # pip packages required by this role. The value is picked up
 # by the py_pkgs lookup.
 magnum_role_project_group: magnum_all
+
+magnum_api_init_config_overrides: {}
+magnum_conductor_init_config_overrides: {}
