@@ -85,6 +85,7 @@ magnum_service_user_domain_name: default
 magnum_trustee_domain_admin_name: trustee_domain_admin
 magnum_trustee_domain_name: magnum
 magnum_trustee_domain_admin_roles: ['admin']
+magnum_cluster_user_trust: True
 
 #Glance images
 magnum_glance_images: []
