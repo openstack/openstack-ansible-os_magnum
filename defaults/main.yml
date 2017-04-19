@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+## Verbosity Options
+debug: False
+
 # Set the package install state for distribution and pip packages
 # Options are 'present' and 'latest'
 magnum_package_state: "latest"
