@@ -14,7 +14,6 @@
 # limitations under the License.
 
 ansible_host: 10.1.1.101
-ansible_host: 10.1.1.101
 ansible_become: True
 ansible_user: root
 tunnel_address: 10.1.2.101

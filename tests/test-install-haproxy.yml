@@ -15,6 +15,7 @@
 
 - name: Install haproxy
   hosts: localhost
+  become: true
   roles:
     - role: "haproxy_server"
       haproxy_service_configs: "{{ haproxy_default_services }}"
