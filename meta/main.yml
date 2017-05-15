@@ -24,6 +24,9 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - xenial
+  - name: EL
+    versions:
+    - 7
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.
   galaxy_tags:
