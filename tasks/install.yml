@@ -91,3 +91,10 @@
   when:
     - not magnum_developer_mode | bool
     - magnum_get_venv | changed or magnum_venv_dir | changed
+
+- name: Record the venv tag deployed
+  ini_file:
+    dest: "/etc/ansible/facts.d/openstack_ansible.fact"
+    section: magnum
+    option: venv_tag
+    value: "{{ magnum_venv_tag }}"
