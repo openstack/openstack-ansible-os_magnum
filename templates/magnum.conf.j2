@@ -3,7 +3,7 @@
 use_stderr = False
 debug = {{ debug }}
 host = {{ ansible_host }}
-rpc_backend = {{ magnum_rpc_backend }}
+transport_url = rabbit://{% for host in magnum_rabbitmq_servers.split(',') %}{{ magnum_rabbitmq_userid }}:{{ magnum_rabbitmq_password }}@{{ host }}:{{ magnum_rabbitmq_port }}{% if not loop.last %},{% else %}/{{ magnum_rabbitmq_vhost }}{% endif %}{% endfor %}
 
 [api]
 host = {{ ansible_host }}
@@ -54,12 +54,7 @@ endpoint_type = internalURL
 endpoint_type = internalURL
 
 [oslo_messaging_rabbit]
-rabbit_port = {{ magnum_rabbitmq_port }}
-rabbit_hosts = {{ magnum_rabbitmq_servers }}
 ssl = {{ magnum_rabbitmq_use_ssl }}
-rabbit_userid = {{ magnum_rabbitmq_userid }}
-rabbit_password = {{ magnum_rabbitmq_password }}
-rabbit_virtual_host = {{ magnum_rabbitmq_vhost }}
 rabbit_notification_exchange = magnum
 rabbit_notification_topic = notification
 

@@ -72,7 +72,6 @@ magnum_galera_database_name: magnum_service
 magnum_galera_user: magnum
 
 # Rabbit vars
-magnum_rpc_backend: rabbit
 magnum_rabbitmq_userid: magnum
 magnum_rabbitmq_vhost: /magnum
 magnum_rabbitmq_servers: 127.0.0.1
