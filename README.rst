@@ -14,7 +14,7 @@ OpenStack-Ansible Magnum
 Ansible role that installs and configures OpenStack Magnum.
 
 Documentation for this project can be found at:
-  http://docs.openstack.org/developer/openstack-ansible-os_magnum/
+  https://docs.openstack.org/openstack-ansible-os_magnum/latest/
 
 The project home is at:
   http://launchpad.net/openstack-ansible
