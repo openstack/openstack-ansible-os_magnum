@@ -27,6 +27,11 @@ galaxy_info:
   - name: EL
     versions:
     - 7
+  - name: opensuse
+    versions:
+    - 42.1
+    - 42.2
+    - 42.3
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.
   galaxy_tags:
