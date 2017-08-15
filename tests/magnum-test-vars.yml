@@ -23,7 +23,7 @@ magnum_glance_images:
     public: true
     file: https://fedorapeople.org/groups/magnum/fedora-atomic-latest.qcow2
     distro: fedora-atomic
-    checksum: "sha1:b08726169870219e3b87687c4fa28a660a3cad4d"
+    checksum: "sha1:f2aacc68fcb32ff7f2099b80e5b25bdad7ce9e33"
 
 haproxy_default_services:
   - service:
