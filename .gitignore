@@ -61,9 +61,8 @@ ChangeLog
 releasenotes/build
 
 # Test temp files
-tests/plugins
 tests/common
-tests/test.retry
+tests/*.retry
 
 # Vagrant artifacts
 .vagrant
