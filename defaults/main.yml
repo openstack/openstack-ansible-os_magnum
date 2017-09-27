@@ -40,6 +40,7 @@ magnum_service_project_name: service
 magnum_service_role_names:
   - admin
 magnum_service_region: RegionOne
+magnum_cinder_service_region: "{{ magnum_service_region }}"
 magnum_bind_port: 9511
 magnum_service_publicuri_proto: http
 magnum_service_publicurl: "{{ magnum_service_publicuri_proto }}://{{ external_lb_vip_address }}:{{ magnum_bind_port }}"
