@@ -4,7 +4,7 @@ tempest_main_group: magnum_all
 tempest_plugins:
   - name: magnum
     repo: https://git.openstack.org/openstack/magnum
-    branch: stable/newton
+    branch: newton-eol
 
 tempest_tempest_conf_overrides:
   magnum:

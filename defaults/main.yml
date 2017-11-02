@@ -55,7 +55,7 @@ magnum_bin: "/openstack/venvs/magnum-{{ magnum_venv_tag }}/bin"
 magnum_venv_download_url: http://127.0.0.1/venvs/untagged/ubuntu/magnum.tgz
 
 magnum_git_repo: "https://git.openstack.org/openstack/magnum"
-magnum_git_install_branch: stable/newton
+magnum_git_install_branch: newton-eol
 magnum_developer_mode: false
 magnum_developer_constraints:
   - "git+{{ magnum_git_repo }}@{{ magnum_git_install_branch }}#egg=magnum"

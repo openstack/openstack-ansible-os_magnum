@@ -20,8 +20,7 @@ magnum_config_overrides:
 
 heat_venv_tag: "testing"
 heat_developer_mode: true
-heat_git_install_branch: stable/newton
-heat_requirements_git_install_branch: stable/newton
+heat_git_install_branch: newton-eol
 heat_service_password: secrete
 heat_stack_domain_admin_password: secrete
 heat_auth_encryption_key: 32characterslongboguskeyvaluefoo
