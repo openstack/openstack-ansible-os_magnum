@@ -48,6 +48,30 @@ To use this role, define the following variables:
 
 This list is not exhaustive. See role internals for further details.
 
+Wiring docker with cinder
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you need to use volumes, default_docker_volume_type should be set.
+By default, Magnum doesn't need one.
+
+To deploy Magnum with cinder integration, please set the following
+in your ``/etc/openstack_deploy/user_variables.yml``:
+
+.. code-block:: yaml
+
+    magnum_config_overrides:
+      cinder:
+        default_docker_volume_type: lvm
+
+If you have defined cinder_default_volume_type for all your nodes,
+by defining it in your user_variables, you can re-use it directly:
+
+.. code-block:: yaml
+
+    magnum_config_overrides:
+      cinder:
+        default_docker_volume_type: "{{ cinder_default_volume_type }}"
+
 Example playbook
 ~~~~~~~~~~~~~~~~
 
