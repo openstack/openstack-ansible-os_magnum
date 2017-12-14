@@ -13,20 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- project:
-    name: openstack/openstack-ansible-os_magnum
-    check:
-      jobs:
-        - openstack-ansible-linters
-        - openstack-ansible-functional-centos-7-nv
-        - openstack-ansible-functional-opensuse-423-nv
-        - openstack-ansible-functional-ubuntu-xenial
-        - openstack-ansible-magnum-ssl-nv
-    experimental:
-      jobs:
-        - openstack-ansible-integrated-deploy-aio
-    gate:
-      jobs:
-        - openstack-ansible-linters
-        - openstack-ansible-functional-ubuntu-xenial
-        - openstack-ansible-magnum-ssl-nv
+- job:
+    name: openstack-ansible-magnum-ssl-nv
+    parent: openstack-ansible-functional-ubuntu-xenial
+    voting: false
+    vars:
+      tox_env: ssl

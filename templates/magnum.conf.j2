@@ -16,7 +16,7 @@ region_name = {{ magnum_cinder_service_region }}
 endpoint_type = internalURL
 
 [database]
-connection = mysql+pymysql://{{ magnum_galera_user }}:{{ magnum_galera_password }}@{{ magnum_galera_address }}/{{ magnum_galera_database_name }}?charset=utf8
+connection = mysql+pymysql://{{ magnum_galera_user }}:{{ magnum_galera_password }}@{{ magnum_galera_address }}/{{ magnum_galera_database_name }}?charset=utf8{% if magnum_galera_use_ssl | bool %}&ssl_ca={{ magnum_galera_ssl_ca_cert }}{% endif %}
 
 [glance_client]
 endpoint_type = internalURL
