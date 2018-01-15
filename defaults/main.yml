@@ -110,7 +110,6 @@ magnum_requires_pip_packages:
   - pyyaml
   - shade
   - virtualenv
-  - virtualenv-tools
 
 magnum_pip_packages:
   - MySQL-python
