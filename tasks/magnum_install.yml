@@ -109,9 +109,13 @@
     - magnum_get_venv | changed
 
 - name: Update virtualenv path
-  command: >
-    virtualenv-tools --update-path=auto --reinitialize {{ magnum_bin | dirname }}
+  shell: |
+    find {{ magnum_bin }} -name \*.pyc -delete
+    sed -si '1s/^.*python.*$/#!{{ magnum_bin | replace ('/','\/') }}\/python/' {{ magnum_bin }}/*
+    virtualenv {{ magnum_bin | dirname }}
   when: magnum_get_venv | changed
+  tags:
+    - skip_ansible_lint
 
 - name: Record the venv tag deployed
   ini_file:
