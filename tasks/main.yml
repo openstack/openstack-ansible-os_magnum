@@ -35,7 +35,7 @@
   tags:
     - magnum-config
 
-- include: magnum_init.yml
+- include: "magnum_init_{{ ansible_service_mgr }}.yml"
   tags:
     - magnum-config
 
