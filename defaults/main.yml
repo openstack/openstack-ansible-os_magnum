@@ -116,6 +116,8 @@ magnum_pip_packages:
   - magnum
   - python-memcached
   - osprofiler
+  - kubernetes==2.0.0
+  - certifi==2017.4.17
 
 # This variable is used by the repo_build process to determine
 # which host group to check for members of before building the
