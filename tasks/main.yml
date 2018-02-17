@@ -49,15 +49,5 @@
   tags:
     - magnum-config
 
-- name: Restart Magnum Services
-  service:
-    name: "{{ item }}"
-    state: "restarted"
-  with_items:
-    - "{{ magnum_api_program_name }}"
-    - "{{ magnum_conductor_program_name }}"
-  tags:
-    - magnum-config
-
 - name: Flush handlers
   meta: flush_handlers

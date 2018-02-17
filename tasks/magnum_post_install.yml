@@ -35,6 +35,8 @@
       destination: "{{ magnum_etc_directory }}/api-paste.ini"
       config_overrides: "{{ magnum_api_paste_ini_overrides }}"
       config_type: "ini"
+  notify:
+    - Restart magnum services
 
 - name: Download magnum images
   get_url:
