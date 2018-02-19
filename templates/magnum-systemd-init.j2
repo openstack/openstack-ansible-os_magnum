@@ -8,13 +8,13 @@ After=network.target
 [Service]
 Type=simple
 EnvironmentFile=/etc/environment
-User={{ system_user }}
-Group={{ system_group }}
+User={{ magnum_system_user_name }}
+Group={{ magnum_system_group_name }}
 
-{% if program_override is defined %}
-ExecStart={{ program_override }} {{ program_config_options|default('') }} --log-file=/var/log/magnum/{{ program_name }}.log
+{% if item.program_override is defined %}
+ExecStart={{ item.program_override }} {{ item.program_config_options|default('') }} --log-file=/var/log/magnum/{{ item.service_name }}.log
 {% else %}
-ExecStart={{ magnum_bin }}/{{ program_name }} {{ program_config_options|default('') }} --log-file=/var/log/magnum/{{ program_name }}.log
+ExecStart={{ magnum_bin }}/{{ item.service_name }} {{ item.program_config_options|default('') }} --log-file=/var/log/magnum/{{ item.service_name }}.log
 {% endif %}
 
 # Give a reasonable amount of time for the server to start up/shut down
