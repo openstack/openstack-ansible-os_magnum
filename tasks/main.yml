@@ -44,6 +44,10 @@
   tags:
     - magnum-config
 
+- include: magnum_uwsgi.yml
+  tags:
+    - magnum-config
+
 - include: magnum_service_setup.yml
   when: inventory_hostname == groups['magnum_all'][0]
   tags:

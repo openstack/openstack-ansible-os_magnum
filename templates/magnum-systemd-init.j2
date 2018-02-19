@@ -12,7 +12,7 @@ User={{ magnum_system_user_name }}
 Group={{ magnum_system_group_name }}
 
 {% if item.program_override is defined %}
-ExecStart={{ item.program_override }} {{ item.program_config_options|default('') }} --log-file=/var/log/magnum/{{ item.service_name }}.log
+ExecStart={{ item.program_override }} {{ item.program_config_options|default('') }} {{ item.log_string | default('--log-file=') }}/var/log/magnum/{{ item.service_name }}.log
 {% else %}
 ExecStart={{ magnum_bin }}/{{ item.service_name }} {{ item.program_config_options|default('') }} --log-file=/var/log/magnum/{{ item.service_name }}.log
 {% endif %}
