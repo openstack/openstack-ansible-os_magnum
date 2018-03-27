@@ -55,8 +55,19 @@ magnum_config_overrides: {}
 magnum_policy_overrides: {}
 magnum_api_paste_ini_overrides: {}
 
+# TODO(odyssey4me):
+# This can be simplified once all the roles are using
+# python_venv_build. We can then switch to using a
+# set of constraints in pip.conf inside the venv,
+# perhaps prepared by giving a giving a list of
+# constraints to the role.
+magnum_pip_install_args: >-
+  {{ magnum_developer_mode | ternary(pip_install_developer_constraints | default('--constraint /opt/developer-pip-constraints.txt'), '') }}
+  {{ (pip_install_upper_constraints is defined) | ternary('--constraint ' + pip_install_upper_constraints | default(''), '') }}
+  {{ pip_install_options | default('') }}
+
 # Name of the virtual env to deploy into
-magnum_venv_tag: untagged
+magnum_venv_tag: "{{ venv_tag | default('untagged') }}"
 magnum_venv_path: "/openstack/venvs/magnum-{{ magnum_venv_tag }}"
 magnum_bin: "{{ magnum_venv_path }}/bin"
 

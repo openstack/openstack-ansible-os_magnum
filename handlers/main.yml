@@ -21,3 +21,5 @@
     state: "restarted"
     daemon_reload: "{{ (ansible_service_mgr == 'systemd') | ternary('yes', omit) }}"
   with_items: "{{ filtered_magnum_services }}"
+  listen:
+    - "venv changed"
