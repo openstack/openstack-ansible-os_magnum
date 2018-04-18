@@ -28,6 +28,7 @@
   until: add_magnum_service |success
   retries: 5
   delay: 2
+  no_log: True
 
 - name: Ensure the magnum user exists
   keystone:
@@ -44,6 +45,7 @@
   until: add_magnum_user |success
   retries: 5
   delay: 2
+  no_log: True
 
 - name: Ensure the magnum user has the admin role
   keystone:
@@ -61,6 +63,7 @@
   retries: 5
   delay: 2
   with_items: "{{ magnum_service_role_names }}"
+  no_log: True
 
 - name: Ensure the magnum endpoint is registered
   keystone:
@@ -84,6 +87,7 @@
   until: add_magnum_endpoints |success
   retries: 5
   delay: 2
+  no_log: True
 
 - name: Ensure the magnum trustee domain exists
   keystone:
@@ -99,6 +103,7 @@
   until: add_magnum_trustee_user |success
   retries: 5
   delay: 2
+  no_log: True
 
 - name: Ensure the magnum trustee user exists
   keystone:
@@ -116,6 +121,7 @@
   until: add_magnum_trustee_user |success
   retries: 5
   delay: 2
+  no_log: True
 
 - name: Ensure the magnum user has the admin role
   keystone:
@@ -133,3 +139,4 @@
   retries: 5
   delay: 2
   with_items: "{{ magnum_trustee_domain_admin_roles }}"
+  no_log: True
