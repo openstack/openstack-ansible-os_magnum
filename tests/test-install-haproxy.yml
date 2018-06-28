@@ -20,4 +20,4 @@
     - role: "haproxy_server"
       haproxy_service_configs: "{{ haproxy_default_services }}"
   vars_files:
-    - magnum-test-vars.yml
+    - common/test-vars.yml
