@@ -13,6 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Create DB for service
+  mysql_db:
+    login_user: "{{ galera_root_user }}"
+    login_password: "{{ galera_root_password }}"
+    login_host: "{{ magnum_galera_address }}"
+    name: "{{ magnum_galera_database_name }}"
+    state: "present"
+  delegate_to: "{{ magnum_db_setup_host }}"
+  no_log: True
+
+- name: Grant access to the DB for the service
+  mysql_user:
+    login_user: "{{ galera_root_user }}"
+    login_password: "{{ galera_root_password }}"
+    login_host: "{{ magnum_galera_address }}"
+    name: "{{ magnum_galera_user }}"
+    password: "{{ magnum_galera_password }}"
+    host: "{{ item }}"
+    state: "present"
+    priv: "{{ magnum_galera_database_name }}.*:ALL"
+  delegate_to: "{{ magnum_db_setup_host }}"
+  with_items:
+    - "localhost"
+    - "%"
+  no_log: True
+
 - name: Perform a synchronization of the Magnum database
   command: "{{ magnum_bin}}/magnum-db-manage upgrade"
   become: yes
