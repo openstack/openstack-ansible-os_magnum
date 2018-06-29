@@ -29,4 +29,3 @@
     - role: "os_magnum"
   vars_files:
     - common/test-vars.yml
-    - magnum-test-vars.yml
