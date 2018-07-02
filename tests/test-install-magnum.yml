@@ -21,10 +21,6 @@
       vhost_name: "{{ magnum_rabbitmq_vhost }}"
       user_name: "{{ magnum_rabbitmq_userid }}"
       user_password: "{{ magnum_rabbitmq_password }}"
-    - include: common/create-grant-db.yml
-      db_user: "{{ magnum_galera_user }}"
-      db_name: "{{ magnum_galera_database_name }}"
-      db_password: "{{ magnum_galera_password }}"
   roles:
     - role: "os_magnum"
   vars_files:
