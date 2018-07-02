@@ -40,11 +40,17 @@ To use this role, define the following variables:
     # Magnum Galera username
     magnum_galera_user: magnum
 
-    # Magnum rabbit userid
-    magnum_rabbitmq_userid: magnum
+    # Magnum rpc userid
+    magnum_oslomsg_rpc_userid: magnum
 
-    # Magnum rabbit vhost
-    magnum_rabbitmq_vhost: /magnum
+    # Magnum rpc vhost
+    magnum_oslomsg_rpc_vhost: /magnum
+
+    # Magnum notify userid
+    magnum_oslomsg_notify_userid: magnum
+
+    # Magnum notify vhost
+    magnum_oslomsg_notify_vhost: /magnum
 
 This list is not exhaustive. See role internals for further details.
 

@@ -7,7 +7,9 @@
     magnum_galera_address: "{{ internal_lb_vip_address }}"
     magnum_galera_database_name: magnum_service
     magnum_galera_user: magnum
-    magnum_rabbitmq_userid: magnum
-    magnum_rabbitmq_vhost: /magnum
+    magnum_oslomsg_rpc_userid: magnum
+    magnum_oslomsg_rpc_vhost: /magnum
+    magnum_oslomsg_notify_userid: magnum
+    magnum_oslomsg_notify_vhost: /magnum
     ansible_hostname: "{{ container_name }}"
     is_metal: "{{ properties.is_metal|default(false) }}"
