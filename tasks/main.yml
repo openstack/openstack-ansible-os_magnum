@@ -61,6 +61,7 @@
     loop_var: service_var
   tags:
     - magnum-config
+    - systemd-service
 
 - include: magnum_db_setup.yml
   when: inventory_hostname == groups['magnum_all'][0]
