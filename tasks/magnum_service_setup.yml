@@ -25,7 +25,7 @@
     service_type: "{{ magnum_service_type }}"
     description: "{{ magnum_service_description }}"
   register: add_magnum_service
-  until: add_magnum_service |success
+  until: add_magnum_service is success
   retries: 5
   delay: 2
   no_log: True
@@ -42,7 +42,7 @@
     tenant_name: "{{ magnum_service_project_name }}"
     password: "{{ magnum_service_password |default('changeme') }}"
   register: add_magnum_user
-  until: add_magnum_user |success
+  until: add_magnum_user is success
   retries: 5
   delay: 2
   no_log: True
@@ -59,7 +59,7 @@
     role_name: "{{ item }}"
     insecure: "{{ keystone_service_adminuri_insecure }}"
   register: ensure_magnum_roles
-  until: ensure_magnum_roles |success
+  until: ensure_magnum_roles is success
   retries: 5
   delay: 2
   with_items: "{{ magnum_service_role_names }}"
@@ -84,7 +84,7 @@
       - url: "{{ magnum_service_adminurl }}"
         interface: "admin"
   register: add_magnum_endpoints
-  until: add_magnum_endpoints |success
+  until: add_magnum_endpoints is success
   retries: 5
   delay: 2
   no_log: True
@@ -100,7 +100,7 @@
     domain_name: "{{ magnum_trustee_domain_name }}"
     domain_enabled: true
   register: add_magnum_trustee_user
-  until: add_magnum_trustee_user |success
+  until: add_magnum_trustee_user is success
   retries: 5
   delay: 2
   no_log: True
@@ -118,7 +118,7 @@
     project_name: "{{ magnum_service_project_name }}"
     password: "{{ magnum_trustee_password |default('changeme') }}"
   register: add_magnum_trustee_user
-  until: add_magnum_trustee_user |success
+  until: add_magnum_trustee_user is success
   retries: 5
   delay: 2
   no_log: True
@@ -135,7 +135,7 @@
     domain_name: "{{ magnum_trustee_domain_name }}"
     insecure: "{{ keystone_service_adminuri_insecure }}"
   register: ensure_magnum_trustee_roles
-  until: ensure_magnum_trustee_roles |success
+  until: ensure_magnum_trustee_roles is success
   retries: 5
   delay: 2
   with_items: "{{ magnum_trustee_domain_admin_roles }}"
