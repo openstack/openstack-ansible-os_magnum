@@ -16,6 +16,11 @@
 ## Verbosity Options
 debug: False
 
+# Set the host which will execute the shade modules
+# for the service setup. The host must already have
+# clouds.yaml properly configured.
+magnum_service_setup_host: "{{ openstack_service_setup_host | default('localhost') }}"
+
 # Set the package install state for distribution and pip packages
 # Options are 'present' and 'latest'
 magnum_package_state: "latest"
@@ -118,13 +123,11 @@ magnum_glance_images: []
 #    distro: fedora-atomic              #Value for the os_distro metadata
 #    checksum: "sha1:dab00359cfa5cd393f0a6044f77c4a78c6167a47"
 
-magnum_requires_pip_packages:
-  - httplib2
-  - python-glanceclient
-  - python-keystoneclient
-  - pyyaml
-  - shade
-  - virtualenv
+# Set the directory where the downloaded images will be stored
+# on the magnum_service_setup_host host. If the host is localhost,
+# then the user running the playbook must have access to it.
+magnum_image_path: "{{ lookup('env', 'HOME') }}/openstack-ansible/magnum"
+magnum_image_path_owner: "{{ lookup('env', 'USER') }}"
 
 magnum_pip_packages:
   - magnum

@@ -15,7 +15,7 @@
 
 - name: Install magnum server
   hosts: magnum_all
-  user: root
+  remote_user: root
   vars_files:
     - common/test-vars.yml
   roles:
