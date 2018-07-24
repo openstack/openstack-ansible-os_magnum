@@ -15,43 +15,43 @@
 # limitations under the License.
 
 # Prepare the hosts
-- include: common/test-setup-host.yml
+- import_playbook: common/test-setup-host.yml
 
 # Install haproxy
-- include: test-install-haproxy.yml
+- import_playbook: test-install-haproxy.yml
 
 # Prepare the cinder-volumes VG
-- include: common/test-setup-cinder-localhost.yml
+- import_playbook: common/test-setup-cinder-localhost.yml
 
 # Install memcached
-- include: common/test-install-memcached.yml
+- import_playbook: common/test-install-memcached.yml
 
 # Install galera
-- include: common/test-install-galera.yml
+- import_playbook: common/test-install-galera.yml
 
 # Install rabbitmq
-- include: common/test-install-rabbitmq.yml
+- import_playbook: common/test-install-rabbitmq.yml
 
 # Install keystone
-- include: common/test-install-keystone.yml
+- import_playbook: common/test-install-keystone.yml
 
 # Install glance
-- include: common/test-install-glance.yml
+- import_playbook: common/test-install-glance.yml
 
 # Install cinder
-- include: common/test-install-cinder.yml
+- import_playbook: common/test-install-cinder.yml
 
 # Install nova
-- include: common/test-install-nova.yml
+- import_playbook: common/test-install-nova.yml
 
 # Install neutron
-- include: common/test-install-neutron.yml
+- import_playbook: common/test-install-neutron.yml
 
 # Install heat
-- include: common/test-install-heat.yml
+- import_playbook: common/test-install-heat.yml
 
 # Install magnum
-- include: test-install-magnum.yml
+- import_playbook: test-install-magnum.yml
 
 # Install and execute tempest
-- include: common/test-install-tempest.yml
+- import_playbook: common/test-install-tempest.yml
