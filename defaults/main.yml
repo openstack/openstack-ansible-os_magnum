@@ -92,8 +92,9 @@ magnum_oslomsg_notify_transport: "{{ oslomsg_notify_transport | default('rabbit'
 magnum_oslomsg_notify_servers: "{{ oslomsg_notify_servers | default('127.0.0.1') }}"
 magnum_oslomsg_notify_port: "{{ oslomsg_notify_port | default('5672') }}"
 magnum_oslomsg_notify_use_ssl: "{{ oslomsg_notify_use_ssl | default(False) }}"
-magnum_oslomsg_notify_userid: magnum
-magnum_oslomsg_notify_vhost: /magnum
+magnum_oslomsg_notify_userid: "{{ magnum_oslomsg_rpc_userid }}"
+magnum_oslomsg_notify_password: "{{ magnum_oslomsg_rpc_password }}"
+magnum_oslomsg_notify_vhost: "{{ magnum_oslomsg_rpc_vhost }}"
 
 # Keystone AuthToken/Middleware
 magnum_keystone_auth_plugin: password
