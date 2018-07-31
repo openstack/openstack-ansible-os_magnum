@@ -127,11 +127,11 @@ magnum_requires_pip_packages:
   - virtualenv
 
 magnum_pip_packages:
-  - MySQL-python
-  - PyMySQL
   - magnum
-  - python-memcached
+  - MySQL-python
   - osprofiler
+  - PyMySQL
+  - python-memcached
   - uwsgi
 
 # This variable is used by the repo_build process to determine
