@@ -24,6 +24,21 @@ endpoint_type = internalURL
 [heat_client]
 endpoint_type = internalURL
 
+[keystone_auth]
+auth_uri = {{ keystone_service_internalurl }}
+auth_version = v3
+insecure = {{ keystone_service_internaluri_insecure | bool }}
+memcached_servers = {{ memcached_servers }}
+token_cache_time = 300
+identity_uri = {{ keystone_service_internaluri }}
+auth_type = {{ magnum_keystone_auth_plugin }}
+auth_url = {{ keystone_service_internaluri }}
+project_domain_name = {{ magnum_service_project_domain_name }}
+user_domain_name = {{ magnum_service_user_domain_name }}
+project_name = {{ magnum_service_project_name }}
+username = {{ magnum_service_user_name }}
+password = {{ magnum_service_password }}
+
 [keystone_authtoken]
 auth_uri = {{ keystone_service_internalurl }}
 auth_version = v3
@@ -38,11 +53,6 @@ user_domain_name = {{ magnum_service_user_domain_name }}
 project_name = {{ magnum_service_project_name }}
 username = {{ magnum_service_user_name }}
 password = {{ magnum_service_password }}
-#TODO(chris_hultin)
-#Remove once https://bugs.launchpad.net/magnum/+bug/1594888 is closed
-admin_user = {{ magnum_service_user_name }}
-admin_tenant_name = {{ magnum_service_project_name }}
-admin_password = {{ magnum_service_password }}
 
 [magnum_client]
 endpoint_type = publicURL
