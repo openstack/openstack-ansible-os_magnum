@@ -8,6 +8,11 @@ transport_url = {{ magnum_oslomsg_rpc_transport }}://{% for host in magnum_oslom
 [api]
 host = {{ ansible_host }}
 
+[drivers]
+# NOTE(mnaser): Remove this once the following bug is fixed
+#               https://bugs.launchpad.net/magnum/+bug/1746510
+send_cluster_metrics = False
+
 [barbican_client]
 endpoint_type = internalURL
 
