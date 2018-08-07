@@ -63,23 +63,23 @@
     - magnum-config
     - systemd-service
 
-- include_tasks: mq_setup.yml
+- import_tasks: mq_setup.yml
   when:
     - "magnum_services['magnum-api']['group'] in group_names"
     - "inventory_hostname == ((groups[magnum_services['magnum-api']['group']]| intersect(ansible_play_hosts)) | list)[0]"
-  with_items:
-    - oslomsg_setup_host: "{{ magnum_oslomsg_rpc_setup_host }}"
-      oslomsg_userid: "{{ magnum_oslomsg_rpc_userid }}"
-      oslomsg_password: "{{ magnum_oslomsg_rpc_password }}"
-      oslomsg_vhost: "{{ magnum_oslomsg_rpc_vhost }}"
-      oslomsg_transport: "{{ magnum_oslomsg_rpc_transport }}"
-    - oslomsg_setup_host: "{{ magnum_oslomsg_notify_setup_host }}"
-      oslomsg_userid: "{{ magnum_oslomsg_notify_userid }}"
-      oslomsg_password: "{{ magnum_oslomsg_notify_password }}"
-      oslomsg_vhost: "{{ magnum_oslomsg_notify_vhost }}"
-      oslomsg_transport: "{{ magnum_oslomsg_notify_transport }}"
-  no_log: true
+  vars:
+    _oslomsg_rpc_setup_host: "{{ magnum_oslomsg_rpc_setup_host }}"
+    _oslomsg_rpc_userid: "{{ magnum_oslomsg_rpc_userid }}"
+    _oslomsg_rpc_password: "{{ magnum_oslomsg_rpc_password }}"
+    _oslomsg_rpc_vhost: "{{ magnum_oslomsg_rpc_vhost }}"
+    _oslomsg_rpc_transport: "{{ magnum_oslomsg_rpc_transport }}"
+    _oslomsg_notify_setup_host: "{{ magnum_oslomsg_notify_setup_host }}"
+    _oslomsg_notify_userid: "{{ magnum_oslomsg_notify_userid }}"
+    _oslomsg_notify_password: "{{ magnum_oslomsg_notify_password }}"
+    _oslomsg_notify_vhost: "{{ magnum_oslomsg_notify_vhost }}"
+    _oslomsg_notify_transport: "{{ magnum_oslomsg_notify_transport }}"
   tags:
+    - common-mq
     - magnum-config
 
 - include: magnum_db_setup.yml
