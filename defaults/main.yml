@@ -101,6 +101,10 @@ magnum_oslomsg_notify_userid: "{{ magnum_oslomsg_rpc_userid }}"
 magnum_oslomsg_notify_password: "{{ magnum_oslomsg_rpc_password }}"
 magnum_oslomsg_notify_vhost: "{{ magnum_oslomsg_rpc_vhost }}"
 
+## (Qdrouterd) integration
+# TODO(ansmith): Change structure when more backends will be supported
+magnum_oslomsg_amqp1_enabled: "{{ magnum_oslomsg_rpc_transport == 'amqp' }}"
+
 # Keystone AuthToken/Middleware
 magnum_keystone_auth_plugin: password
 magnum_service_project_domain_name: Default
@@ -136,6 +140,9 @@ magnum_pip_packages:
   - PyMySQL
   - python-memcached
   - uwsgi
+
+magnum_optional_oslomsg_amqp1_pip_packages:
+  - oslo.messaging[amqp1]
 
 # This variable is used by the repo_build process to determine
 # which host group to check for members of before building the
