@@ -1,3 +1,4 @@
+---
 - name: Install Magnum server
   hosts: magnum_all
   user: root
