@@ -25,6 +25,7 @@
         - openstack-ansible-functional-opensuse-423:
             voting: false
         - openstack-ansible-functional-ubuntu-xenial
+        - openstack-ansible-functional-ubuntu-bionic
         - openstack-ansible-magnum-ssl-nv
     experimental:
       jobs:
@@ -33,3 +34,4 @@
       jobs:
         - openstack-ansible-linters
         - openstack-ansible-functional-ubuntu-xenial
+        - openstack-ansible-functional-ubuntu-bionic
