@@ -22,14 +22,13 @@
         - openstack-ansible-linters
         - openstack-ansible-functional-centos-7:
             voting: false
-        - openstack-ansible-functional-opensuse-423:
-            voting: false
+        - openstack-ansible-functional-opensuse-423
         - openstack-ansible-functional-ubuntu-xenial
-        - openstack-ansible-magnum-ssl-nv
     experimental:
       jobs:
         - openstack-ansible-integrated-deploy-aio
     gate:
       jobs:
         - openstack-ansible-linters
+        - openstack-ansible-functional-opensuse-423
         - openstack-ansible-functional-ubuntu-xenial
