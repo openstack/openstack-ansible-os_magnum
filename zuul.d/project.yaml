@@ -23,7 +23,6 @@
         - openstack-ansible-functional-centos-7-nv
         - openstack-ansible-functional-opensuse-423-nv
         - openstack-ansible-functional-ubuntu-xenial
-        - openstack-ansible-magnum-ssl-nv
     experimental:
       jobs:
         - openstack-ansible-integrated-deploy-aio
