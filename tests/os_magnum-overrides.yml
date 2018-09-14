@@ -15,7 +15,7 @@ tempest_run: yes
 tempest_plugins:
   - name: magnum
     repo: https://git.openstack.org/openstack/magnum-tempest-plugin
-    branch: master
+    branch: '0.1.0'
 
 tempest_test_whitelist:
   - magnum_tempest_plugin.tests.api.v1.test_cluster.ClusterTest.test_create_cluster*
