@@ -146,7 +146,6 @@ magnum_image_path_owner: "{{ lookup('env', 'USER') }}"
 
 magnum_pip_packages:
   - magnum
-  - MySQL-python
   - osprofiler
   - PyMySQL
   - python-memcached
