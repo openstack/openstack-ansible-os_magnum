@@ -111,7 +111,6 @@ magnum_requires_pip_packages:
   - virtualenv-tools
 
 magnum_pip_packages:
-  - MySQL-python
   - PyMySQL
   - magnum
   - python-memcached
