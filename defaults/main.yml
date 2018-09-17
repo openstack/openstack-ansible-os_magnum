@@ -131,3 +131,15 @@ magnum_cert_manager_type: x509keypair
 magnum_api_init_config_overrides: {}
 magnum_conductor_init_config_overrides: {}
 
+# Indicates whether the cluster nodes validate the Certificate Authority when
+# making requests to the OpenStack APIs (Keystone, Magnum, Heat). If you have
+# self-signed certificates for the OpenStack APIs or you have your own
+# Certificate Authority and you have not installed the Certificate Authority to
+# all nodes, you may need to disable CA validation by setting this flag to
+# False. (boolean value)
+magnum_enable_verify_ca: True
+
+# Path to the OpenStack CA-bundle file to pass and install in all cluster
+# nodes. (string value)
+magnum_ca_file_bundle_path: ""
+

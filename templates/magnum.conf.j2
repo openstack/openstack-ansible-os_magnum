@@ -70,3 +70,7 @@ trustee_keystone_interface= public
 
 [certificates]
 cert_manager_type = {{ magnum_cert_manager_type }}
+
+[drivers]
+verify_ca = {{ magnum_enable_verify_ca }}
+openstack_ca_file = {{ magnum_ca_file_bundle_path }}
