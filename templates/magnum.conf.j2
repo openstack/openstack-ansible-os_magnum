@@ -9,6 +9,7 @@ transport_url = rabbit://{% for host in magnum_rabbitmq_servers.split(',') %}{{ 
 host = {{ ansible_host }}
 
 [barbican_client]
+region_name = {{ magnum_barbican_service_region }}
 endpoint_type = internalURL
 
 [cinder_client]
@@ -19,9 +20,11 @@ endpoint_type = internalURL
 connection = mysql+pymysql://{{ magnum_galera_user }}:{{ magnum_galera_password }}@{{ magnum_galera_address }}/{{ magnum_galera_database_name }}?charset=utf8{% if magnum_galera_use_ssl | bool %}&ssl_ca={{ magnum_galera_ssl_ca_cert }}{% endif %}
 
 [glance_client]
+region_name = {{ magnum_glance_service_region }}
 endpoint_type = internalURL
 
 [heat_client]
+region_name = {{ magnum_heat_service_region }}
 endpoint_type = internalURL
 
 [keystone_authtoken]
@@ -45,12 +48,15 @@ admin_tenant_name = {{ magnum_service_project_name }}
 admin_password = {{ magnum_service_password }}
 
 [magnum_client]
+region_name = {{ magnum_service_region }}
 endpoint_type = publicURL
 
 [neutron_client]
+region_name = {{ magnum_neutron_service_region }}
 endpoint_type = internalURL
 
 [nova_client]
+region_name = {{ magnum_nova_service_region }}
 endpoint_type = internalURL
 
 [oslo_messaging_rabbit]
