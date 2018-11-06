@@ -33,7 +33,8 @@ region_name = {{ magnum_heat_service_region }}
 endpoint_type = internalURL
 
 [keystone_auth]
-auth_uri = {{ keystone_service_internalurl }}
+auth_uri = {{ keystone_service_publicurl }}
+www_authenticate_uri = {{ keystone_service_publicurl }}
 auth_version = v3
 insecure = {{ keystone_service_internaluri_insecure | bool }}
 memcached_servers = {{ memcached_servers }}
@@ -47,7 +48,8 @@ username = {{ magnum_service_user_name }}
 password = {{ magnum_service_password }}
 
 [keystone_authtoken]
-auth_uri = {{ keystone_service_internalurl }}
+auth_uri = {{ keystone_service_publicurl }}
+www_authenticate_uri = {{ keystone_service_publicurl }}
 auth_version = v3
 insecure = {{ keystone_service_internaluri_insecure | bool }}
 memcached_servers = {{ memcached_servers }}
