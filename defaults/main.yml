@@ -160,6 +160,9 @@ magnum_pip_packages:
   - python-memcached
   - uwsgi
 
+# Specific pip packages provided by the user
+magnum_user_pip_packages: []
+
 magnum_optional_oslomsg_amqp1_pip_packages:
   - oslo.messaging[amqp1]
 
