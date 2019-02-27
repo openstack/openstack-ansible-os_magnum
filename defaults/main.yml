@@ -143,9 +143,9 @@ magnum_glance_images: []
 #    disk_format: qcow2                 #Disk format (e.g. qcow2)
 #    image_format: bare                 #Image format
 #    public: true                       #Boolean - is the image public
-#    file: https://fedorapeople.org/groups/magnum/fedora-atomic-latest.qcow2
+#    file: https://download.fedoraproject.org/pub/alt/atomic/stable/Fedora-Atomic-27-20180419.0/CloudImages/x86_64/images/Fedora-Atomic-27-20180419.0.x86_64.qcow2
 #    distro: fedora-atomic              #Value for the os_distro metadata
-#    checksum: "sha1:dab00359cfa5cd393f0a6044f77c4a78c6167a47"
+#    checksum: "sha1:8559997cc932357c6ec353e82e583e2486fd7e05"
 
 # Set the directory where the downloaded images will be stored
 # on the magnum_service_setup_host host. If the host is localhost,
