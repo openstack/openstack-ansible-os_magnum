@@ -52,6 +52,7 @@ magnum_glance_service_region: "{{ magnum_service_region }}"
 magnum_heat_service_region: "{{ magnum_service_region }}"
 magnum_neutron_service_region: "{{ magnum_service_region }}"
 magnum_nova_service_region: "{{ magnum_service_region }}"
+magnum_keystone_service_region: "{{ magnum_service_region }}"
 magnum_bind_port: 9511
 magnum_service_publicuri_proto: http
 magnum_service_publicurl: "{{ magnum_service_publicuri_proto }}://{{ external_lb_vip_address }}:{{ magnum_bind_port }}"

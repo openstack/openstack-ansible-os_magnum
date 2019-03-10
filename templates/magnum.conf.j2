@@ -48,6 +48,7 @@ username = {{ magnum_service_user_name }}
 password = {{ magnum_service_password }}
 
 [keystone_authtoken]
+region_name = {{ magnum_keystone_service_region }}
 auth_uri = {{ keystone_service_publicurl }}
 www_authenticate_uri = {{ keystone_service_publicurl }}
 auth_version = v3
