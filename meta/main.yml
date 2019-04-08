@@ -21,6 +21,9 @@ galaxy_info:
   min_ansible_version: 2.2
   version: 0.1.0
   platforms:
+  - name: Debian
+    versions:
+    - stretch
   - name: Ubuntu
     versions:
     - xenial
