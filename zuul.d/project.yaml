@@ -17,18 +17,6 @@
     templates:
       - check-requirements
       - openstack-ansible-linters
+      - openstack-ansible-deploy-aio_metal-jobs
       - publish-openstack-docs-pti
       - release-notes-jobs-python3
-    check:
-      jobs:
-        - openstack-ansible-deploy-aio_metal_magnum-centos-7
-        - openstack-ansible-deploy-aio_metal_magnum-debian-stable
-        - openstack-ansible-deploy-aio_metal_magnum-ubuntu-bionic
-    gate:
-      jobs:
-        - openstack-ansible-deploy-aio_metal_magnum-centos-7
-        - openstack-ansible-deploy-aio_metal_magnum-debian-stable
-        - openstack-ansible-deploy-aio_metal_magnum-ubuntu-bionic
-    experimental:
-      jobs:
-        - openstack-ansible-deploy-aio_metal_magnum-opensuse-150
