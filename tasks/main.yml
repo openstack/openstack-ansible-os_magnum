@@ -23,6 +23,40 @@
   tags:
     - always
 
+- import_tasks: db_setup.yml
+  when:
+    - "magnum_services['magnum-api']['group'] in group_names"
+    - "inventory_hostname == ((groups[magnum_services['magnum-api']['group']]| intersect(ansible_play_hosts)) | list)[0]"
+  vars:
+    _oslodb_setup_host: "{{ magnum_db_setup_host }}"
+    _oslodb_databases:
+      - name: "{{ magnum_galera_database_name }}"
+        users:
+          - username: "{{ magnum_galera_user }}"
+            password: "{{ magnum_galera_password }}"
+  tags:
+    - common-db
+    - magnum-config
+
+- import_tasks: mq_setup.yml
+  when:
+    - "magnum_services['magnum-api']['group'] in group_names"
+    - "inventory_hostname == ((groups[magnum_services['magnum-api']['group']]| intersect(ansible_play_hosts)) | list)[0]"
+  vars:
+    _oslomsg_rpc_setup_host: "{{ magnum_oslomsg_rpc_setup_host }}"
+    _oslomsg_rpc_userid: "{{ magnum_oslomsg_rpc_userid }}"
+    _oslomsg_rpc_password: "{{ magnum_oslomsg_rpc_password }}"
+    _oslomsg_rpc_vhost: "{{ magnum_oslomsg_rpc_vhost }}"
+    _oslomsg_rpc_transport: "{{ magnum_oslomsg_rpc_transport }}"
+    _oslomsg_notify_setup_host: "{{ magnum_oslomsg_notify_setup_host }}"
+    _oslomsg_notify_userid: "{{ magnum_oslomsg_notify_userid }}"
+    _oslomsg_notify_password: "{{ magnum_oslomsg_notify_password }}"
+    _oslomsg_notify_vhost: "{{ magnum_oslomsg_notify_vhost }}"
+    _oslomsg_notify_transport: "{{ magnum_oslomsg_notify_transport }}"
+  tags:
+    - common-mq
+    - magnum-config
+
 - include_tasks: magnum_pre_install.yml
   tags:
     - magnum-install
@@ -75,26 +109,7 @@
     - magnum-config
     - systemd-service
 
-- import_tasks: mq_setup.yml
-  when:
-    - "magnum_services['magnum-api']['group'] in group_names"
-    - "inventory_hostname == ((groups[magnum_services['magnum-api']['group']]| intersect(ansible_play_hosts)) | list)[0]"
-  vars:
-    _oslomsg_rpc_setup_host: "{{ magnum_oslomsg_rpc_setup_host }}"
-    _oslomsg_rpc_userid: "{{ magnum_oslomsg_rpc_userid }}"
-    _oslomsg_rpc_password: "{{ magnum_oslomsg_rpc_password }}"
-    _oslomsg_rpc_vhost: "{{ magnum_oslomsg_rpc_vhost }}"
-    _oslomsg_rpc_transport: "{{ magnum_oslomsg_rpc_transport }}"
-    _oslomsg_notify_setup_host: "{{ magnum_oslomsg_notify_setup_host }}"
-    _oslomsg_notify_userid: "{{ magnum_oslomsg_notify_userid }}"
-    _oslomsg_notify_password: "{{ magnum_oslomsg_notify_password }}"
-    _oslomsg_notify_vhost: "{{ magnum_oslomsg_notify_vhost }}"
-    _oslomsg_notify_transport: "{{ magnum_oslomsg_notify_transport }}"
-  tags:
-    - common-mq
-    - magnum-config
-
-- include_tasks: magnum_db_setup.yml
+- include_tasks: magnum_db_sync.yml
   when: inventory_hostname == groups['magnum_all'][0]
   tags:
     - magnum-config
