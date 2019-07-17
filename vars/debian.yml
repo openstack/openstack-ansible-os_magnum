@@ -23,6 +23,7 @@ magnum_distro_packages:
   - libxml2-dev
   - libxslt-dev
   - libpq-dev
+  - libsystemd-dev
   - git
   - libffi-dev
   - gettext

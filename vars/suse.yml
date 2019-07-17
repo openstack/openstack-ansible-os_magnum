@@ -25,3 +25,4 @@ magnum_distro_packages:
   - libffi-devel
   - gettext
   - gcc
+  - systemd-devel
