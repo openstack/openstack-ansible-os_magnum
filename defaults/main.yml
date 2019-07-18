@@ -35,7 +35,6 @@ magnum_system_user_name: magnum
 magnum_system_user_comment: Magnum System User
 magnum_system_user_shell: /bin/false
 magnum_system_user_home: "/var/lib/{{ magnum_system_user_name }}"
-magnum_log_directory: /var/log/magnum
 magnum_etc_directory: /etc/magnum
 
 magnum_service_name: magnum
@@ -146,6 +145,7 @@ magnum_pip_packages:
   - osprofiler
   - PyMySQL
   - python-memcached
+  - systemd-python
   - uwsgi
 
 # Specific pip packages provided by the user
