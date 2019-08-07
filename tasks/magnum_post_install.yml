@@ -37,3 +37,45 @@
       config_type: "ini"
   notify:
     - Restart magnum services
+
+- name: Add magnum image
+  delegate_to: "{{ magnum_service_setup_host }}"
+  vars:
+    ansible_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
+  block:
+    - name: Create image download directory
+      file:
+        path: "{{ magnum_image_path }}"
+        state: directory
+        mode: "0750"
+        owner: "{{ magnum_image_path_owner }}"
+
+    - name: Download images
+      get_url:
+        url: "{{ item.file }}"
+        dest: "{{ magnum_image_path }}/{{ item.file | basename }}"
+        checksum: "{{ item.checksum | default(omit) }}"
+      register: download_image
+      until: download_image is success
+      retries: 5
+      delay: 10
+      with_items: "{{ magnum_glance_images }}"
+
+    - name: Upload images to Glance
+      os_image:
+        cloud: default
+        state: present
+        endpoint_type: admin
+        verify: "{{ not keystone_service_adminuri_insecure }}"
+        name: "{{ item.name }}"
+        disk_format: "{{ item.disk_format }}"
+        container_format: "{{ item.image_format }}"
+        is_public: "{{ item.public }}"
+        filename: "{{ magnum_image_path }}/{{ item.file | basename }}"
+        properties:
+          os_distro: "{{ item.distro }}"
+      register: upload_image
+      until: upload_image is success
+      retries: 5
+      delay: 10
+      with_items: "{{ magnum_glance_images }}"

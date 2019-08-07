@@ -18,78 +18,16 @@
 # appropriate python libraries in that venv. If the delegation
 # is to another host, we assume that it is accessible by the
 # system python instead.
+
+# NOTE (noonedeadpunk) We can't move domain creation inside service_setup.yml
+# since for role assignment we need to provide ID of created domain instead of
+# domain name (which we have). This might be dropped right after backport of
+# https://github.com/ansible/ansible/commit/737da1853ef2239e27a2fe380c3e83ba5b34de5b
 - name: Setup the service
   delegate_to: "{{ magnum_service_setup_host }}"
   vars:
     ansible_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
   block:
-    - name: Add service to the keystone service catalog
-      os_keystone_service:
-        cloud: default
-        state: present
-        name: "{{ magnum_service_name }}"
-        service_type: "{{ magnum_service_type }}"
-        description: "{{ magnum_service_description }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_service
-      until: add_service is success
-      retries: 5
-      delay: 10
-
-    - name: Add service user
-      os_user:
-        cloud: default
-        state: present
-        name: "{{ magnum_service_user_name }}"
-        password: "{{ magnum_service_password }}"
-        domain: default
-        default_project: "{{ magnum_service_project_name }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_service_user
-      until: add_service_user is success
-      retries: 5
-      delay: 10
-      no_log: True
-
-    - name: Add service user to admin roles
-      os_user_role:
-        cloud: default
-        state: present
-        user: "{{ magnum_service_user_name }}"
-        role: "{{ item }}"
-        project: "{{ magnum_service_project_name }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_service_user_role
-      until: add_service_user_role is success
-      retries: 5
-      delay: 10
-      with_items: "{{ magnum_service_role_names }}"
-
-    - name: Add endpoints to keystone endpoint catalog
-      os_keystone_endpoint:
-        cloud: default
-        state: present
-        service: "{{ magnum_service_name }}"
-        endpoint_interface: "{{ item.interface }}"
-        url: "{{ item.url }}"
-        region: "{{ magnum_service_region }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_service_endpoints
-      until: add_service_endpoints is success
-      retries: 5
-      delay: 10
-      with_items:
-        - interface: "public"
-          url: "{{ magnum_service_publicurl }}"
-        - interface: "internal"
-          url: "{{ magnum_service_internalurl }}"
-        - interface: "admin"
-          url: "{{ magnum_service_adminurl }}"
-
     - name: Add trustee domain
       os_keystone_domain:
         cloud: default
@@ -102,70 +40,44 @@
       retries: 5
       delay: 10
 
-    - name: Add trustee user
-      os_user:
-        cloud: default
-        state: present
-        name: "{{ magnum_trustee_domain_admin_name }}"
-        password: "{{ magnum_trustee_password }}"
-        domain: "{{ magnum_trustee_domain_name }}"
-        default_project: "{{ magnum_service_project_name }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_trustee_user
-      until: add_trustee_user is success
-      retries: 5
-      delay: 10
-      no_log: True
-
-    - name: Add trustee user to trustee domain admin roles
-      os_user_role:
-        cloud: default
-        state: present
-        user: "{{ magnum_trustee_domain_admin_name }}"
-        role: "{{ item }}"
-        domain: "{{ add_trustee_domain.id }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_trustee_role
-      until: add_trustee_role is success
-      retries: 5
-      delay: 10
-      with_items: "{{ magnum_trustee_domain_admin_roles }}"
-
-    - name: Create image download directory
-      file:
-        path: "{{ magnum_image_path }}"
-        state: directory
-        mode: "0750"
-        owner: "{{ magnum_image_path_owner }}"
-
-    - name: Download images
-      get_url:
-        url: "{{ item.file }}"
-        dest: "{{ magnum_image_path }}/{{ item.file | basename }}"
-        checksum: "{{ item.checksum | default(omit) }}"
-      register: download_image
-      until: download_image is success
-      retries: 5
-      delay: 10
-      with_items: "{{ magnum_glance_images }}"
-
-    - name: Upload images to Glance
-      os_image:
-        cloud: default
-        state: present
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-        name: "{{ item.name }}"
-        disk_format: "{{ item.disk_format }}"
-        container_format: "{{ item.image_format }}"
-        is_public: "{{ item.public }}"
-        filename: "{{ magnum_image_path }}/{{ item.file | basename }}"
-        properties:
-          os_distro: "{{ item.distro }}"
-      register: upload_image
-      until: upload_image is success
-      retries: 5
-      delay: 10
-      with_items: "{{ magnum_glance_images }}"
+- import_tasks: service_setup.yml
+  vars:
+    _service_adminuri_insecure: "{{ keystone_service_adminuri_insecure }}"
+    _service_setup_host: "{{ magnum_service_setup_host }}"
+    _service_setup_host_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
+    _service_project_name: "{{ magnum_service_project_name }}"
+    _service_region: "{{ magnum_service_region }}"
+    _service_users: |-
+      {% set users = [
+          {
+            'name': magnum_service_user_name,
+            'password': magnum_service_password
+          },
+          {
+            'name': magnum_trustee_domain_admin_name,
+            'password': magnum_trustee_password,
+            'domain': magnum_trustee_domain_name
+          }
+        ]
+      %}
+      {% for role in magnum_service_role_names %}
+      {%   set _ = users.append({'name': magnum_service_user_name, 'role': role}) %}
+      {% endfor %}
+      {% for role in magnum_trustee_domain_admin_roles %}
+      {%   set _ = users.append({'name': magnum_trustee_domain_admin_name, 'role': role, 'domain': add_trustee_domain.id, 'project': ''}) %}
+      {% endfor %}
+      {{ users }}
+    _service_endpoints:
+      - service: "{{ magnum_service_name }}"
+        interface: "public"
+        url: "{{ magnum_service_publicurl }}"
+      - service: "{{ magnum_service_name }}"
+        interface: "internal"
+        url: "{{ magnum_service_internalurl }}"
+      - service: "{{ magnum_service_name }}"
+        interface: "admin"
+        url: "{{ magnum_service_adminurl }}"
+    _service_catalog:
+      - name: "{{ magnum_service_name }}"
+        type: "{{ magnum_service_type }}"
+        description: "{{ magnum_service_description }}"
