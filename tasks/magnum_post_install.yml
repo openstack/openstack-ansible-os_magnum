@@ -37,6 +37,7 @@
       config_type: "ini"
   notify:
     - Restart magnum services
+    - Restart uwsgi services
 
 - name: Add magnum image
   delegate_to: "{{ magnum_service_setup_host }}"
