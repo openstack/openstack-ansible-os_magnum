@@ -105,9 +105,15 @@
   tags:
     - magnum-config
 
-- import_tasks: magnum_uwsgi.yml
+- name: Import uwsgi role
+  import_role:
+    name: uwsgi
+  vars:
+    uwsgi_services: "{{ uwsgi_magnum_services }}"
+    uwsgi_install_method: "source"
   tags:
     - magnum-config
+    - uwsgi
 
 - import_tasks: magnum_service_setup.yml
   when: inventory_hostname == groups['magnum_all'][0]
