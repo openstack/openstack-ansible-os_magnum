@@ -16,6 +16,9 @@
 ## Verbosity Options
 debug: False
 
+#python venv executable
+magnum_venv_python_executable: "{{ openstack_venv_python_executable | default('python2') }}"
+
 # Enable/Disable Ceilometer
 magnum_ceilometer_enabled: False
 
