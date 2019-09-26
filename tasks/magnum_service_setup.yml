@@ -56,7 +56,8 @@
           {
             'name': magnum_trustee_domain_admin_name,
             'password': magnum_trustee_password,
-            'domain': magnum_trustee_domain_name
+            'domain': magnum_trustee_domain_name,
+            'project': ''
           }
         ]
       %}
