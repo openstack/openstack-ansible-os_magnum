@@ -74,9 +74,9 @@ magnum_venv_tag: "{{ venv_tag | default('untagged') }}"
 magnum_venv_path: "/openstack/venvs/magnum-{{ magnum_venv_tag }}"
 magnum_bin: "{{ magnum_venv_path }}/bin"
 
-magnum_git_repo: "https://git.openstack.org/openstack/magnum"
+magnum_git_repo: "https://opendev.org/openstack/magnum"
 magnum_git_install_branch: master
-magnum_upper_constraints_url: "{{ requirements_git_url | default('https://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt?h=' ~ requirements_git_install_branch | default('master')) }}"
+magnum_upper_constraints_url: "{{ requirements_git_url | default('https://releases.openstack.org/constraints/upper/' ~ requirements_git_install_branch | default('master')) }}"
 magnum_git_constraints:
   - "git+{{ magnum_git_repo }}@{{ magnum_git_install_branch }}#egg=magnum"
   - "--constraint {{ magnum_upper_constraints_url }}"
