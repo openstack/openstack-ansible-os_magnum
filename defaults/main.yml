@@ -182,7 +182,6 @@ magnum_services:
     init_config_overrides: "{{ magnum_api_init_config_overrides }}"
     start_order: 2
     wsgi_app: True
-    wsgi_name: lib/python2.7/site-packages/magnum/api/app.wsgi
     uwsgi_overrides: "{{ magnum_api_uwsgi_ini_overrides }}"
     uwsgi_port: "{{ magnum_bind_port }}"
     uwsgi_bind_address: "{{ magnum_api_uwsgi_bind_address }}"

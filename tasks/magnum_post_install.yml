@@ -80,3 +80,10 @@
       retries: 5
       delay: 10
       with_items: "{{ magnum_glance_images }}"
+
+- name: Find magnum lib dir
+  command: "{{ magnum_bin }}/python -c \"import pkg_resources;print(pkg_resources.resource_filename('magnum', ''))\" "
+  become: yes
+  become_user: "{{ magnum_system_user_name }}"
+  changed_when: false
+  register: magnum_lib_dir
