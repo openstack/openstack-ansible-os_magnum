@@ -41,6 +41,7 @@
 
 - name: Add magnum image
   delegate_to: "{{ magnum_service_setup_host }}"
+  run_once: true
   vars:
     ansible_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
   block:
