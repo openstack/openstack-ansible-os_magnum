@@ -170,8 +170,12 @@ magnum_pip_packages:
   - magnum
   - osprofiler
   - PyMySQL
+  - pymemcache
   - python-memcached
   - systemd-python
+
+# Memcached override
+magnum_memcached_servers: "{{ memcached_servers }}"
 
 # Specific pip packages provided by the user
 magnum_user_pip_packages: []
