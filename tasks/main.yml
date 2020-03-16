@@ -123,3 +123,8 @@
 
 - name: Flush handlers
   meta: flush_handlers
+
+- import_tasks: magnum_resources.yml
+  when: inventory_hostname == groups['magnum_all'][0]
+  tags:
+    - magnum-config
