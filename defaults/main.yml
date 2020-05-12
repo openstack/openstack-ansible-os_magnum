@@ -183,12 +183,6 @@ magnum_user_pip_packages: []
 magnum_optional_oslomsg_amqp1_pip_packages:
   - oslo.messaging[amqp1]
 
-# This variable is used by the repo_build process to determine
-# which host group to check for members of before building the
-# pip packages required by this role. The value is picked up
-# by the py_pkgs lookup.
-magnum_role_project_group: magnum_all
-
 # Store certificates in DB by default (x509keypair)
 # Other valid values are: barbican, local
 magnum_cert_manager_type: x509keypair
