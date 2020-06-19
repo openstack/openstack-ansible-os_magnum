@@ -15,7 +15,7 @@
 
 # Common apt packages
 magnum_distro_packages:
-  - python-devel
+  - "{{ ansible_distribution_major_version is version('8', '<') | ternary('python-devel', 'python36-devel') }}"
   - openssl-devel
   - libxml2-devel
   - libxslt-devel
