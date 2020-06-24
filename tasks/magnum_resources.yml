@@ -38,7 +38,7 @@
       with_items: "{{ magnum_glance_images }}"
 
     - name: Upload images to Glance
-      os_image:
+      openstack.cloud.os_image:
         cloud: "{{ item.cloud | default('default') }}"
         state: "{{ item.state | default('present') }}"
         interface: "{{ item.interface | default('admin') }}"
@@ -57,7 +57,7 @@
       with_items: "{{ magnum_glance_images }}"
 
     - name: Create flavors for Magnum
-      os_nova_flavor:
+      openstack.cloud.os_nova_flavor:
         cloud: "{{ item.cloud | default('default') }}"
         state: "{{ item.state | default('present') }}"
         is_public: "{{ item.is_public | default(omit) }}"
@@ -76,7 +76,7 @@
       with_items: "{{ magnum_flavors }}"
 
     - name: Create Magnum cluster templates
-      os_coe_cluster_template:
+      openstack.cloud.os_coe_cluster_template:
         cloud: "{{ item.cloud | default('default') }}"
         state: "{{ item.state | default('present') }}"
         interface: "{{ item.interface | default('admin') }}"
