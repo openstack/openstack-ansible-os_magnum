@@ -14,8 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Common zypper packages
-magnum_distro_packages:
+magnum_distro_packages: []
+
+# Packages for buildind the python wheels
+magnum_devel_distro_packages:
   - python-devel
   - libopenssl-devel
   - libxml2-devel

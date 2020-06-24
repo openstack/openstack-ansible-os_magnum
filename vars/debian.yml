@@ -16,9 +16,11 @@
 ## APT Cache options
 cache_timeout: 600
 
-# Common apt packages
-magnum_distro_packages:
-  - python-dev
+magnum_distro_packages: []
+
+# Packages for buildind the python wheels
+magnum_devel_distro_packages:
+  - python3-dev
   - libssl-dev
   - libxml2-dev
   - libxslt-dev
