@@ -25,8 +25,7 @@
 
 - import_tasks: db_setup.yml
   when:
-    - "magnum_services['magnum-api']['group'] in group_names"
-    - "inventory_hostname == ((groups[magnum_services['magnum-api']['group']]| intersect(ansible_play_hosts)) | list)[0]"
+    - "_magnum_is_first_play_host"
   vars:
     _oslodb_setup_host: "{{ magnum_db_setup_host }}"
     _oslodb_ansible_python_interpreter: "{{ magnum_db_setup_python_interpreter }}"
@@ -43,8 +42,7 @@
 
 - import_tasks: mq_setup.yml
   when:
-    - "magnum_services['magnum-api']['group'] in group_names"
-    - "inventory_hostname == ((groups[magnum_services['magnum-api']['group']]| intersect(ansible_play_hosts)) | list)[0]"
+    - "_magnum_is_first_play_host"
   vars:
     _oslomsg_rpc_setup_host: "{{ magnum_oslomsg_rpc_setup_host }}"
     _oslomsg_rpc_userid: "{{ magnum_oslomsg_rpc_userid }}"
@@ -105,7 +103,7 @@
     - systemd-service
 
 - import_tasks: magnum_db_sync.yml
-  when: inventory_hostname == groups['magnum_all'][0]
+  when: _magnum_is_first_play_host
   tags:
     - magnum-config
 
@@ -120,7 +118,7 @@
     - uwsgi
 
 - import_tasks: magnum_service_setup.yml
-  when: inventory_hostname == groups['magnum_all'][0]
+  when: _magnum_is_first_play_host
   tags:
     - magnum-config
 
@@ -128,6 +126,6 @@
   meta: flush_handlers
 
 - import_tasks: magnum_resources.yml
-  when: inventory_hostname == groups['magnum_all'][0]
+  when: _magnum_is_first_play_host
   tags:
     - magnum-config
