@@ -66,6 +66,7 @@ magnum_service_adminurl: "{{ magnum_service_adminuri_proto }}://{{ internal_lb_v
 magnum_config_overrides: {}
 magnum_policy_overrides: {}
 magnum_api_paste_ini_overrides: {}
+magnum_keystone_auth_default_policy: []
 
 magnum_pip_install_args: "{{ pip_install_options | default('') }}"
 
