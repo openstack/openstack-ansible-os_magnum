@@ -35,6 +35,11 @@
       destination: "{{ magnum_etc_directory }}/api-paste.ini"
       config_overrides: "{{ magnum_api_paste_ini_overrides }}"
       config_type: "ini"
+    - source: "keystone_auth_default_policy.json.j2"
+      destination: "{{ magnum_etc_directory }}/keystone_auth_default_policy.json"
+      config_overrides: "{{ magnum_keystone_auth_default_policy }}"
+      config_type: "json"
+
   notify:
     - Restart magnum services
     - Restart uwsgi services
