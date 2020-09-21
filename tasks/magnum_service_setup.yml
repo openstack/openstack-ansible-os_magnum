@@ -19,29 +19,9 @@
 # is to another host, we assume that it is accessible by the
 # system python instead.
 
-# NOTE (noonedeadpunk) We can't move domain creation inside service_setup.yml
-# since for role assignment we need to provide ID of created domain instead of
-# domain name (which we have). This might be dropped right after backport of
-# https://github.com/ansible/ansible/commit/737da1853ef2239e27a2fe380c3e83ba5b34de5b
-- name: Setup the service
-  delegate_to: "{{ magnum_service_setup_host }}"
-  vars:
-    ansible_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
-  block:
-    - name: Add trustee domain
-      os_keystone_domain:
-        cloud: default
-        state: present
-        name: "{{ magnum_trustee_domain_name }}"
-        endpoint_type: admin
-        verify: "{{ not keystone_service_adminuri_insecure }}"
-      register: add_trustee_domain
-      until: add_trustee_domain is success
-      retries: 5
-      delay: 10
-
 - import_tasks: service_setup.yml
   vars:
+    _domain_name: "{{ magnum_trustee_domain_name }}"
     _service_adminuri_insecure: "{{ keystone_service_adminuri_insecure }}"
     _service_setup_host: "{{ magnum_service_setup_host }}"
     _service_setup_host_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
@@ -65,7 +45,7 @@
       {%   set _ = users.append({'name': magnum_service_user_name, 'role': role}) %}
       {% endfor %}
       {% for role in magnum_trustee_domain_admin_roles %}
-      {%   set _ = users.append({'name': magnum_trustee_domain_admin_name, 'role': role, 'domain': add_trustee_domain.id, 'project': ''}) %}
+      {%   set _ = users.append({'name': magnum_trustee_domain_admin_name, 'role': role, 'domain': magnum_trustee_domain_name, 'project': ''}) %}
       {% endfor %}
       {{ users }}
     _service_endpoints:
