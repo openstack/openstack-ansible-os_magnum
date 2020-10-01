@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Perform a synchronization of the Magnum database
-  command: "{{ magnum_bin}}/magnum-db-manage upgrade"
+  command: "{{ magnum_bin }}/magnum-db-manage upgrade"
   become: yes
   become_user: "{{ magnum_system_user_name }}"
   changed_when: false
