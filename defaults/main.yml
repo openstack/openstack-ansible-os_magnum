@@ -122,7 +122,7 @@ magnum_oslomsg_amqp1_enabled: "{{ magnum_oslomsg_rpc_transport == 'amqp' }}"
 # Keystone AuthToken/Middleware
 magnum_keystone_auth_plugin: password
 magnum_service_project_domain_name: Default
-magnum_service_user_domain_name: default
+magnum_service_user_domain_name: Default
 
 # Trustee User
 magnum_trustee_domain_admin_name: trustee_domain_admin
