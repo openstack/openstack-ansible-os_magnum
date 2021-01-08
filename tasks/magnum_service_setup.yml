@@ -25,6 +25,7 @@
     _service_adminuri_insecure: "{{ keystone_service_adminuri_insecure }}"
     _service_setup_host: "{{ magnum_service_setup_host }}"
     _service_setup_host_python_interpreter: "{{ magnum_service_setup_host_python_interpreter }}"
+    _service_in_ldap: "{{ magnum_service_in_ldap }}"
     _service_project_name: "{{ magnum_service_project_name }}"
     _service_region: "{{ magnum_service_region }}"
     _service_users: |-
