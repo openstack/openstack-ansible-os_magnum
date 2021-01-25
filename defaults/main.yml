@@ -80,7 +80,6 @@ magnum_git_repo: "https://opendev.org/openstack/magnum"
 magnum_git_install_branch: master
 magnum_upper_constraints_url: "{{ requirements_git_url | default('https://releases.openstack.org/constraints/upper/' ~ requirements_git_install_branch | default('master')) }}"
 magnum_git_constraints:
-  - "git+{{ magnum_git_repo }}@{{ magnum_git_install_branch }}#egg=magnum"
   - "--constraint {{ magnum_upper_constraints_url }}"
 
 # Database vars
@@ -171,7 +170,7 @@ magnum_image_path: "{{ lookup('env', 'HOME') }}/openstack-ansible/magnum"
 magnum_image_path_owner: "{{ lookup('env', 'USER') }}"
 
 magnum_pip_packages:
-  - magnum
+  - "git+{{ magnum_git_repo }}@{{ magnum_git_install_branch }}#egg=magnum"
   - osprofiler
   - PyMySQL
   - pymemcache
