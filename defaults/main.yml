@@ -17,7 +17,7 @@
 debug: False
 
 #python venv executable
-magnum_venv_python_executable: "{{ openstack_venv_python_executable | default('python2') }}"
+magnum_venv_python_executable: "{{ openstack_venv_python_executable | default('python3') }}"
 
 # Enable/Disable Ceilometer
 magnum_ceilometer_enabled: "{{ (groups['ceilometer_all'] is defined) and (groups['ceilometer_all'] | length > 0) }}"
