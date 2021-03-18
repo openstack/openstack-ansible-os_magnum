@@ -23,3 +23,12 @@
   with_items: "{{ filtered_magnum_services }}"
   listen:
     - "venv changed"
+
+# NOTE (noonedeadpunk): Remove this task after Xena release
+- name: Remove obsoleted policy.json
+  file:
+    path: "{{ magnum_etc_directory }}/policy.json"
+    state: absent
+  listen:
+    - "Restart magnum services"
+    - "venv changed"

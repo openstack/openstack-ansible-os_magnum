@@ -27,10 +27,6 @@
       destination: "{{ magnum_etc_directory }}/magnum.conf"
       config_overrides: "{{ magnum_config_overrides }}"
       config_type: "ini"
-    - source: "policy.json.j2"
-      destination: "{{ magnum_etc_directory }}/policy.json"
-      config_overrides: "{{ magnum_policy_overrides }}"
-      config_type: "json"
     - source: "api-paste.ini.j2"
       destination: "{{ magnum_etc_directory }}/api-paste.ini"
       config_overrides: "{{ magnum_api_paste_ini_overrides }}"
@@ -39,7 +35,28 @@
       destination: "{{ magnum_etc_directory }}/keystone_auth_default_policy.json"
       config_overrides: "{{ magnum_keystone_auth_default_policy }}"
       config_type: "json"
-
   notify:
     - Restart magnum services
     - Restart uwsgi services
+
+- name: Implement policy.yaml
+  config_template:
+    destination: "{{ magnum_etc_directory }}/policy.yaml"
+    content: "{{ magnum_policy_overrides }}"
+    owner: "{{ magnum_system_user_name }}"
+    group: "{{ magnum_system_group_name }}"
+    mode: "0644"
+    config_type: "yaml"
+  when:
+    - magnum_policy_overrides | length > 0
+  tags:
+    - magnum-policy-override
+
+- name: Remove legacy policy.yaml file
+  file:
+    path: "{{ magnum_etc_directory }}/policy.yaml"
+    state: absent
+  when:
+    - magnum_policy_overrides | length == 0
+  tags:
+    - magnum-policy-override
