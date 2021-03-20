@@ -26,7 +26,7 @@ magnum_ceilometer_enabled: "{{ (groups['ceilometer_all'] is defined) and (groups
 # for the service setup. The host must already have
 # clouds.yaml properly configured.
 magnum_service_setup_host: "{{ openstack_service_setup_host | default('localhost') }}"
-magnum_service_setup_host_python_interpreter: "{{ openstack_service_setup_host_python_interpreter | default((magnum_service_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_python['executable'])) }}"
+magnum_service_setup_host_python_interpreter: "{{ openstack_service_setup_host_python_interpreter | default((magnum_service_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_facts['python']['executable'])) }}"
 
 # Set the package install state for distribution packages
 # Options are 'present' and 'latest'
@@ -84,7 +84,7 @@ magnum_git_constraints:
 
 # Database vars
 magnum_db_setup_host: "{{ openstack_db_setup_host | default('localhost') }}"
-magnum_db_setup_python_interpreter: "{{ openstack_db_setup_python_interpreter | default((magnum_db_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_python['executable'])) }}"
+magnum_db_setup_python_interpreter: "{{ openstack_db_setup_python_interpreter | default((magnum_db_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_facts['python']['executable'])) }}"
 magnum_galera_address: "{{ galera_address | default('127.0.0.1') }}"
 magnum_galera_database_name: magnum_service
 magnum_galera_user: magnum
@@ -214,6 +214,6 @@ magnum_services:
 # uWSGI Settings
 magnum_api_uwsgi_ini_overrides: {}
 magnum_wsgi_processes_max: 16
-magnum_wsgi_processes: "{{ [[(ansible_processor_vcpus//ansible_processor_threads_per_core)|default(1), 1] | max * 2, magnum_wsgi_processes_max] | min }}"
+magnum_wsgi_processes: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_wsgi_processes_max] | min }}"
 magnum_wsgi_threads: 1
 magnum_api_uwsgi_bind_address: "{{ openstack_service_bind_address | default('0.0.0.0') }}"
