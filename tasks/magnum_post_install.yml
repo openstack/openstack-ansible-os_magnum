@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Distribute Magnum Config Files
-  config_template:
+  openstack.config_template.config_template:
     src: "{{ item.source }}"
     dest: "{{ item.destination }}"
     owner: "{{ magnum_system_user_name }}"
@@ -40,7 +40,7 @@
     - Restart uwsgi services
 
 - name: Implement policy.yaml
-  config_template:
+  openstack.config_template.config_template:
     destination: "{{ magnum_etc_directory }}/policy.yaml"
     content: "{{ magnum_policy_overrides }}"
     owner: "{{ magnum_system_user_name }}"
