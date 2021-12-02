@@ -23,7 +23,11 @@ region_name = {{ magnum_cinder_service_region }}
 endpoint_type = internalURL
 
 [database]
-connection = mysql+pymysql://{{ magnum_galera_user }}:{{ magnum_galera_password }}@{{ magnum_galera_address }}/{{ magnum_galera_database_name }}?charset=utf8{% if magnum_galera_use_ssl | bool %}&ssl_verify_cert=true{% if magnum_galera_ssl_ca_cert | length > 0 %}&ssl_ca={{ magnum_galera_ssl_ca_cert }}{% endif %}{% endif %}
+connection = mysql+pymysql://{{ magnum_galera_user }}:{{ magnum_galera_password }}@{{ magnum_galera_address }}/{{ magnum_galera_database_name }}?charset=utf8{% if magnum_galera_use_ssl | bool %}&ssl_verify_cert=true{% if magnum_galera_ssl_ca_cert | length > 0 %}&ssl_ca={{ magnum_galera_ssl_ca_cert }}{% endif %}{% endif +%}
+max_overflow = {{ magnum_db_max_overflow }}
+max_pool_size = {{ magnum_db_max_pool_size }}
+pool_timeout = {{ magnum_db_pool_timeout }}
+connection_recycle_time = {{ magnum_db_connection_recycle_time }}
 
 [glance_client]
 region_name = {{ magnum_glance_service_region }}

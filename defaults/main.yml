@@ -91,6 +91,10 @@ magnum_galera_user: magnum
 magnum_galera_use_ssl: "{{ galera_use_ssl | default(False) }}"
 magnum_galera_ssl_ca_cert: "{{ galera_ssl_ca_cert | default('') }}"
 magnum_galera_port: "{{ galera_port | default('3306') }}"
+magnum_db_max_overflow: "{{ openstack_db_max_overflow | default('50') }}"
+magnum_db_max_pool_size: "{{ openstack_db_max_pool_size | default('5') }}"
+magnum_db_pool_timeout: "{{ openstack_db_pool_timeout | default('30') }}"
+magnum_db_connection_recycle_time: "{{ openstack_db_connection_recycle_time | default('600') }}"
 
 # Oslo Messaging vars
 # RPC
