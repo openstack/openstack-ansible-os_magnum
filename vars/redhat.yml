@@ -18,7 +18,6 @@ magnum_distro_packages: []
 
 # Packages for building the python wheels
 magnum_devel_distro_packages:
-  - python36-devel
   - openssl-devel
   - libxml2-devel
   - libxslt-devel
