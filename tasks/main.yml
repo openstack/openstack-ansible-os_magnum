@@ -23,7 +23,12 @@
   tags:
     - always
 
-- import_tasks: db_setup.yml
+- include_role:
+    name: openstack.osa.db_setup
+    apply:
+      tags:
+        - common-db
+        - magnum-config
   when:
     - "_magnum_is_first_play_host"
   vars:
@@ -37,10 +42,14 @@
           - username: "{{ magnum_galera_user }}"
             password: "{{ magnum_galera_password }}"
   tags:
-    - common-db
-    - magnum-config
+    - always
 
-- import_tasks: mq_setup.yml
+- include_role:
+    name: openstack.osa.mq_setup
+    apply:
+      tags:
+        - common-mq
+        - magnum-config
   when:
     - "_magnum_is_first_play_host"
   vars:
@@ -55,8 +64,7 @@
     _oslomsg_notify_vhost: "{{ magnum_oslomsg_notify_vhost }}"
     _oslomsg_notify_transport: "{{ magnum_oslomsg_notify_transport }}"
   tags:
-    - common-mq
-    - magnum-config
+    - always
 
 - import_tasks: magnum_pre_install.yml
   tags:
