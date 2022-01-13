@@ -68,5 +68,7 @@
       - name: "{{ magnum_service_name }}"
         type: "{{ magnum_service_type }}"
         description: "{{ magnum_service_description }}"
+  when:
+    - "_magnum_is_first_play_host"
   tags:
     - always
