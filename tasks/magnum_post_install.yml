@@ -41,7 +41,7 @@
 
 - name: Implement policy.yaml
   config_template:
-    destination: "{{ magnum_etc_directory }}/policy.yaml"
+    dest: "{{ magnum_etc_directory }}/policy.yaml"
     content: "{{ magnum_policy_overrides }}"
     owner: "{{ magnum_system_user_name }}"
     group: "{{ magnum_system_group_name }}"
