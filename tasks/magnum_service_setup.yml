@@ -33,27 +33,15 @@
     _service_in_ldap: "{{ magnum_service_in_ldap }}"
     _service_project_name: "{{ magnum_service_project_name }}"
     _service_region: "{{ magnum_service_region }}"
-    _service_users: |-
-      {% set users = [
-          {
-            'name': magnum_service_user_name,
-            'password': magnum_service_password
-          },
-          {
-            'name': magnum_trustee_domain_admin_name,
-            'password': magnum_trustee_password,
-            'domain': magnum_trustee_domain_name,
-            'project': ''
-          }
-        ]
-      %}
-      {% for role in magnum_service_role_names %}
-      {%   set _ = users.append({'name': magnum_service_user_name, 'role': role}) %}
-      {% endfor %}
-      {% for role in magnum_trustee_domain_admin_roles %}
-      {%   set _ = users.append({'name': magnum_trustee_domain_admin_name, 'role': role, 'domain': magnum_trustee_domain_name, 'project': ''}) %}
-      {% endfor %}
-      {{ users }}
+    _service_users:
+      - name: "{{ magnum_service_user_name }}"
+        password: "{{ magnum_service_password }}"
+        role: "{{ magnum_service_role_names }}"
+      - name: "{{ magnum_trustee_domain_admin_name }}"
+        password: "{{ magnum_trustee_password }}"
+        domain: "{{ magnum_trustee_domain_name }}"
+        project: ''
+        role: "{{ magnum_trustee_domain_admin_roles }}"
     _service_endpoints:
       - service: "{{ magnum_service_name }}"
         interface: "public"

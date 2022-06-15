@@ -46,6 +46,10 @@ magnum_service_description: "OpenStack Containers (Magnum)"
 magnum_service_project_name: service
 magnum_service_role_names:
   - admin
+  - service
+magnum_service_token_roles:
+  - service
+magnum_service_token_roles_required: "{{ openstack_service_token_roles_required | default(True) }}"
 magnum_service_region: "{{ service_region | default('RegionOne') }}"
 magnum_barbican_service_region: "{{ magnum_service_region }}"
 magnum_cinder_service_region: "{{ magnum_service_region }}"
@@ -134,7 +138,8 @@ magnum_service_user_domain_name: Default
 # Trustee User
 magnum_trustee_domain_admin_name: trustee_domain_admin
 magnum_trustee_domain_name: magnum
-magnum_trustee_domain_admin_roles: ['admin']
+magnum_trustee_domain_admin_roles:
+  - admin
 magnum_cluster_user_trust: True
 
 #Glance images

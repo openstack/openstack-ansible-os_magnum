@@ -57,6 +57,9 @@ user_domain_name = {{ magnum_service_user_domain_name }}
 project_name = {{ magnum_service_project_name }}
 username = {{ magnum_service_user_name }}
 password = {{ magnum_service_password }}
+service_token_roles_required = {{ magnum_service_token_roles_required | bool }}
+service_token_roles = {{ magnum_service_token_roles | join(',') }}
+service_type = {{ magnum_service_type }}
 
 [magnum_client]
 region_name = {{ magnum_service_region }}
