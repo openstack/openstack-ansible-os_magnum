@@ -225,3 +225,7 @@ magnum_wsgi_processes_max: 16
 magnum_wsgi_processes: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_wsgi_processes_max] | min }}"
 magnum_wsgi_threads: 1
 magnum_api_uwsgi_bind_address: "{{ openstack_service_bind_address | default('0.0.0.0') }}"
+
+# conductor settings
+magnum_conductor_workers_max: 16
+magnum_conductor_workers: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_conductor_workers_max] | min }}"
