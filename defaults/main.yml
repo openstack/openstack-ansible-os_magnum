@@ -223,6 +223,7 @@ magnum_services:
     uwsgi_overrides: "{{ magnum_api_uwsgi_ini_overrides }}"
     uwsgi_port: "{{ magnum_bind_port }}"
     uwsgi_bind_address: "{{ magnum_api_uwsgi_bind_address }}"
+    uwsgi_tls: "{{ magnum_backend_ssl | ternary(magnum_uwsgi_tls, {}) }}"
 
 # uWSGI Settings
 magnum_api_uwsgi_ini_overrides: {}
@@ -230,7 +231,58 @@ magnum_wsgi_processes_max: 16
 magnum_wsgi_processes: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_wsgi_processes_max] | min }}"
 magnum_wsgi_threads: 1
 magnum_api_uwsgi_bind_address: "{{ openstack_service_bind_address | default('0.0.0.0') }}"
+magnum_uwsgi_tls:
+  crt: "{{ magnum_ssl_cert }}"
+  key: "{{ magnum_ssl_key }}"
 
 # conductor settings
 magnum_conductor_workers_max: 16
 magnum_conductor_workers: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_conductor_workers_max] | min }}"
+
+###
+### Backend TLS
+###
+
+# Define if communication between haproxy and service backends should be
+# encrypted with TLS(works only with uWSGI).
+magnum_backend_ssl: "{{ openstack_service_backend_ssl | default(False) }}"
+
+# Storage location for SSL certificate authority
+magnum_pki_dir: "{{ openstack_pki_dir | default('/etc/openstack_deploy/pki') }}"
+
+# Delegated host for operating the certificate authority
+magnum_pki_setup_host: "{{ openstack_pki_setup_host | default('localhost') }}"
+
+# magnum server certificate
+magnum_pki_keys_path: "{{ magnum_pki_dir ~ '/certs/private/' }}"
+magnum_pki_certs_path: "{{ magnum_pki_dir ~ '/certs/certs/' }}"
+magnum_pki_intermediate_cert_name: "{{ openstack_pki_service_intermediate_cert_name | default('ExampleCorpIntermediate') }}"
+magnum_pki_regen_cert: ''
+magnum_pki_san: "{{ openstack_pki_san | default('DNS:' ~ ansible_facts['hostname'] ~ ',IP:' ~ management_address) }}"
+magnum_pki_certificates:
+  - name: "magnum_{{ ansible_facts['hostname'] }}"
+    provider: ownca
+    cn: "{{ ansible_facts['hostname'] }}"
+    san: "{{ magnum_pki_san }}"
+    signed_by: "{{ magnum_pki_intermediate_cert_name }}"
+
+# magnum destination files for SSL certificates
+magnum_ssl_cert: /etc/magnum/magnum.pem
+magnum_ssl_key: /etc/magnum/magnum.key
+
+# Installation details for SSL certificates
+magnum_pki_install_certificates:
+  - src: "{{ magnum_user_ssl_cert | default(magnum_pki_certs_path ~ 'magnum_' ~ ansible_facts['hostname'] ~ '-chain.crt') }}"
+    dest: "{{ magnum_ssl_cert }}"
+    owner: "{{ magnum_system_user_name }}"
+    group: "{{ magnum_system_user_name }}"
+    mode: "0644"
+  - src: "{{ magnum_user_ssl_key | default(magnum_pki_keys_path ~ 'magnum_' ~ ansible_facts['hostname'] ~ '.key.pem') }}"
+    dest: "{{ magnum_ssl_key }}"
+    owner: "{{ magnum_system_user_name }}"
+    group: "{{ magnum_system_user_name }}"
+    mode: "0600"
+
+# Define user-provided SSL certificates
+#magnum_user_ssl_cert: <path to cert on ansible deployment host>
+#magnum_user_ssl_key: <path to cert on ansible deployment host>

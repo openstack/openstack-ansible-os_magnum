@@ -94,6 +94,26 @@
   tags:
     - magnum-install
 
+- name: Create and install SSL certificates
+  include_role:
+    name: pki
+    tasks_from: main_certs.yml
+    apply:
+      tags:
+        - magnum-config
+        - pki
+  vars:
+    pki_setup_host: "{{ magnum_pki_setup_host }}"
+    pki_dir: "{{ magnum_pki_dir }}"
+    pki_create_certificates: "{{ magnum_user_ssl_cert is not defined and magnum_user_ssl_key is not defined }}"
+    pki_regen_cert: "{{ magnum_pki_regen_cert }}"
+    pki_certificates: "{{ magnum_pki_certificates }}"
+    pki_install_certificates: "{{ magnum_pki_install_certificates }}"
+  when:
+    - magnum_backend_ssl
+  tags:
+    - always
+
 - import_tasks: magnum_post_install.yml
   tags:
     - magnum-config
