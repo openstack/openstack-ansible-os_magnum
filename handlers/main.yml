@@ -23,3 +23,4 @@
   with_items: "{{ filtered_magnum_services }}"
   listen:
     - "venv changed"
+    - "systemd service changed"
