@@ -90,7 +90,7 @@
         fixed_network: "{{ item.fixed_network | default(omit) }}"
         fixed_subnet: "{{ item.fixed_subnet | default(omit) }}"
         flavor_id: "{{ item.flavor_id }}"
-        floating_ip_enabled: "{{ item.floating_ip_enabled | default(omit) }}"
+        is_floating_ip_enabled: "{{ item.floating_ip_enabled | default(omit) }}"
         image_id: "{{ item.image_id }}"
         keypair_id: "{{ item.keypair_id | default(omit) }}"
         labels: "{{ item.labels | default(omit) }}"
