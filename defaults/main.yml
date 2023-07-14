@@ -16,7 +16,7 @@
 ## Verbosity Options
 debug: False
 
-#python venv executable
+# python venv executable
 magnum_venv_python_executable: "{{ openstack_venv_python_executable | default('python3') }}"
 
 # Enable/Disable Ceilometer
@@ -26,7 +26,11 @@ magnum_ceilometer_enabled: "{{ (groups['ceilometer_all'] is defined) and (groups
 # for the service setup. The host must already have
 # clouds.yaml properly configured.
 magnum_service_setup_host: "{{ openstack_service_setup_host | default('localhost') }}"
-magnum_service_setup_host_python_interpreter: "{{ openstack_service_setup_host_python_interpreter | default((magnum_service_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_facts['python']['executable'])) }}"
+magnum_service_setup_host_python_interpreter: >-
+  {{
+    openstack_service_setup_host_python_interpreter | default(
+      (magnum_service_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_facts['python']['executable']))
+  }}
 
 # Set the package install state for distribution packages
 # Options are 'present' and 'latest'
@@ -82,13 +86,18 @@ magnum_bin: "{{ magnum_venv_path }}/bin"
 
 magnum_git_repo: "https://opendev.org/openstack/magnum"
 magnum_git_install_branch: master
-magnum_upper_constraints_url: "{{ requirements_git_url | default('https://releases.openstack.org/constraints/upper/' ~ requirements_git_install_branch | default('master')) }}"
+magnum_upper_constraints_url: >-
+  {{ requirements_git_url | default('https://releases.openstack.org/constraints/upper/' ~ requirements_git_install_branch | default('master')) }}
 magnum_git_constraints:
   - "--constraint {{ magnum_upper_constraints_url }}"
 
 # Database vars
 magnum_db_setup_host: "{{ openstack_db_setup_host | default('localhost') }}"
-magnum_db_setup_python_interpreter: "{{ openstack_db_setup_python_interpreter | default((magnum_db_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_facts['python']['executable'])) }}"
+magnum_db_setup_python_interpreter: >-
+  {{
+    openstack_db_setup_python_interpreter | default(
+      (magnum_db_setup_host == 'localhost') | ternary(ansible_playbook_python, ansible_facts['python']['executable']))
+  }}
 magnum_galera_address: "{{ galera_address | default('127.0.0.1') }}"
 magnum_galera_database_name: magnum_service
 magnum_galera_user: magnum
@@ -142,7 +151,7 @@ magnum_trustee_domain_admin_roles:
   - admin
 magnum_cluster_user_trust: True
 
-#Glance images
+# Glance images
 ## Example Glance Image - Fedora Atomic
 #  - name: fedora-atomic-latest         #Name of the image in Glance
 #    disk_format: qcow2                 #Disk format (e.g. qcow2)
@@ -156,24 +165,24 @@ magnum_glance_images: []
 # Define cluster templates to create. It should be list of
 # dictionaries with keys that are supported by os_coe_cluster_template
 # module (https://docs.ansible.com/ansible/latest/modules/os_coe_cluster_template_module.html)
-#magnum_cluster_templates:
-#  - name: k8s
-#    cloud: default
-#    coe: kubernetes
-#    docker_volume_size: 50
-#    external_network_id: public
-#    network_driver: flannel
+# magnum_cluster_templates:
+#   - name: k8s
+#     cloud: default
+#     coe: kubernetes
+#     docker_volume_size: 50
+#     external_network_id: public
+#     network_driver: flannel
 magnum_cluster_templates: []
 
 # Create extra flavors to be used by magnum cluster template. It should be list
 # of dictionaries with keys that are supported by os_nova_flavor module
 # (https://docs.ansible.com/ansible/latest/modules/os_nova_flavor_module.html)
-#magnum_flavors:
-#  - name: k8s-pod
-#    cloud: default
-#    ram: 256
-#    vcpus: 1
-#    disk: 5
+# magnum_flavors:
+#   - name: k8s-pod
+#     cloud: default
+#     ram: 256
+#     vcpus: 1
+#     disk: 5
 magnum_flavors: []
 
 # Set the directory where the downloaded images will be stored
@@ -228,7 +237,8 @@ magnum_services:
 # uWSGI Settings
 magnum_api_uwsgi_ini_overrides: {}
 magnum_wsgi_processes_max: 16
-magnum_wsgi_processes: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_wsgi_processes_max] | min }}"
+magnum_wsgi_processes: >-
+  {{ [[(ansible_facts['processor_vcpus'] // ansible_facts['processor_threads_per_core']) | default(1), 1] | max * 2, magnum_wsgi_processes_max] | min }}
 magnum_wsgi_threads: 1
 magnum_api_uwsgi_bind_address: "{{ openstack_service_bind_address | default('0.0.0.0') }}"
 magnum_uwsgi_tls:
@@ -237,7 +247,8 @@ magnum_uwsgi_tls:
 
 # conductor settings
 magnum_conductor_workers_max: 16
-magnum_conductor_workers: "{{ [[(ansible_facts['processor_vcpus']//ansible_facts['processor_threads_per_core'])|default(1), 1] | max * 2, magnum_conductor_workers_max] | min }}"
+magnum_conductor_workers: >-
+  {{ [[(ansible_facts['processor_vcpus'] // ansible_facts['processor_threads_per_core']) | default(1), 1] | max * 2, magnum_conductor_workers_max] | min }}
 
 ###
 ### Backend TLS
@@ -284,5 +295,5 @@ magnum_pki_install_certificates:
     mode: "0600"
 
 # Define user-provided SSL certificates
-#magnum_user_ssl_cert: <path to cert on ansible deployment host>
-#magnum_user_ssl_key: <path to cert on ansible deployment host>
+# magnum_user_ssl_cert: <path to cert on ansible deployment host>
+# magnum_user_ssl_key: <path to cert on ansible deployment host>

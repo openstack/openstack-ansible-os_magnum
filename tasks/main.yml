@@ -28,7 +28,8 @@
   tags:
     - always
 
-- include_role:
+- name: Including osa.db_setup role
+  include_role:
     name: openstack.osa.db_setup
     apply:
       tags:
@@ -49,7 +50,8 @@
   tags:
     - always
 
-- include_role:
+- name: Including osa.mq_setup role
+  include_role:
     name: openstack.osa.mq_setup
     apply:
       tags:
@@ -71,7 +73,8 @@
   tags:
     - always
 
-- import_tasks: magnum_pre_install.yml
+- name: Importing magnum_pre_install tasks
+  import_tasks: magnum_pre_install.yml
   tags:
     - magnum-install
 
@@ -114,7 +117,8 @@
   tags:
     - always
 
-- import_tasks: magnum_post_install.yml
+- name: Importing magnum_post_install tasks
+  import_tasks: magnum_post_install.yml
   tags:
     - magnum-config
 
@@ -127,16 +131,17 @@
     systemd_tempd_prefix: openstack
     systemd_slice_name: magnum
     systemd_lock_path: /var/lock/magnum
-    systemd_CPUAccounting: true
-    systemd_BlockIOAccounting: true
-    systemd_MemoryAccounting: true
-    systemd_TasksAccounting: true
+    systemd_service_cpu_accounting: true
+    systemd_service_block_io_accounting: true
+    systemd_service_memory_accounting: true
+    systemd_service_tasks_accounting: true
     systemd_services: "{{ filtered_magnum_services }}"
   tags:
     - magnum-config
     - systemd-service
 
-- import_tasks: magnum_db_sync.yml
+- name: Importing magnum_db_sync tasks
+  import_tasks: magnum_db_sync.yml
   when: _magnum_is_first_play_host
   tags:
     - magnum-config
@@ -151,7 +156,8 @@
     - magnum-config
     - uwsgi
 
-- import_tasks: magnum_service_setup.yml
+- name: Importing magnum_service_setup tasks
+  import_tasks: magnum_service_setup.yml
   when: _magnum_is_first_play_host
   tags:
     - magnum-config
@@ -159,7 +165,8 @@
 - name: Flush handlers
   meta: flush_handlers
 
-- import_tasks: magnum_resources.yml
+- name: Importing magnum_resources tasks
+  import_tasks: magnum_resources.yml
   when: _magnum_is_first_play_host
   tags:
     - magnum-config

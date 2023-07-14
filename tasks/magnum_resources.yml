@@ -31,6 +31,7 @@
         url: "{{ item.file }}"
         dest: "{{ magnum_image_path }}/{{ item.file | basename }}"
         checksum: "{{ item.checksum | default(omit) }}"
+        mode: "0644"
       register: download_image
       until: download_image is success
       retries: 5

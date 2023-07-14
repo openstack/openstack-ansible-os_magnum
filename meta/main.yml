@@ -18,26 +18,27 @@ galaxy_info:
   description: Deploy Magnum with OpenStack Ansible
   company: OpenStack
   license: Apache-2.0
-  min_ansible_version: 2.2
-  version: 0.1.0
+  role_name: os_magnum
+  namespace: openstack
+  min_ansible_version: "2.10"
   platforms:
-  - name: Debian
-    versions:
-    - buster
-  - name: Ubuntu
-    versions:
-      - bionic
-      - focal
-  - name: EL
-    versions:
-      - 8
+    - name: Debian
+      versions:
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: EL
+      versions:
+        - "9"
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.
   galaxy_tags:
-   - cloud
-   - openstack
-   - python
-   - magnum
+    - cloud
+    - openstack
+    - python
+    - magnum
 
 dependencies:
   - role: apt_package_pinning

@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_magnum_is_first_play_host: "{{ (magnum_services['magnum-api']['group'] in group_names and inventory_hostname == (groups[magnum_services['magnum-api']['group']] | intersect(ansible_play_hosts)) | first) | bool }}"
+_magnum_is_first_play_host: >-
+  {{
+    (magnum_services['magnum-api']['group'] in group_names and
+      inventory_hostname == (groups[magnum_services['magnum-api']['group']] | intersect(ansible_play_hosts)) | first) | bool
+  }}
 
 #
 # Compile a list of the services on a host based on whether
