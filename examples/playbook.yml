@@ -3,7 +3,9 @@
   hosts: magnum_all
   user: root
   roles:
-    - { role: "os_magnum", tags: [ "os-magnum" ] }
+    - role: "os_magnum"
+      tags:
+        - os-magnum"
   vars:
     magnum_galera_address: "{{ internal_lb_vip_address }}"
     magnum_galera_password: secrete
