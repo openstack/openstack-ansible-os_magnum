@@ -75,6 +75,14 @@
         rxtx_factor: "{{ item.rxtx_factor | default(omit) }}"
       with_items: "{{ magnum_flavors }}"
 
+    - name: Wait for magnum endpoint to become reachable
+      uri:
+        url: "{{ magnum_service_internalurl }}"
+      register: result
+      until: "result.status == 200"
+      retries: 10
+      delay: 10
+
     - name: Create Magnum cluster templates
       openstack.cloud.coe_cluster_template:
         cloud: "{{ item.cloud | default('default') }}"
