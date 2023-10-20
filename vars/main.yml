@@ -19,6 +19,16 @@ _magnum_is_first_play_host: >-
     (magnum_services['magnum-api']['group'] in group_names and
       inventory_hostname == (groups[magnum_services['magnum-api']['group']] | intersect(ansible_play_hosts)) | first) | bool
   }}
+_magnum_oslomsg_rpc_vhost_conf: >-
+  {{
+    (magnum_oslomsg_rpc_vhost is string) | ternary(
+      magnum_oslomsg_rpc_vhost, magnum_oslomsg_rpc_vhost | selectattr('state', 'eq', 'present') | map(attribute='name') | first)
+  }}
+_magnum_oslomsg_notify_vhost_conf: >-
+  {{
+    (magnum_oslomsg_notify_vhost is string) | ternary(
+      magnum_oslomsg_notify_vhost, magnum_oslomsg_notify_vhost | selectattr('state', 'eq', 'present') | map(attribute='name') | first)
+  }}
 
 #
 # Compile a list of the services on a host based on whether
