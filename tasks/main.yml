@@ -170,3 +170,4 @@
   when: _magnum_is_first_play_host
   tags:
     - magnum-config
+    - magnum-resources
