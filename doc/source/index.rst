@@ -128,7 +128,8 @@ Via os_magnum playbooks and data in user_variables.yml
       image_format: bare
       public: true
       file: https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/31.20200210.3.0/x86_64/fedora-coreos-31.20200210.3.0-openstack.x86_64.qcow2.xz
-      distro: "coreos"
+      properties:
+        os_distro: "fedora-coreos"
       checksum: "sha256:9a5252e24b82a5edb1ce75b05653f59895685b0f1028112462e908a12deae518"
 
 

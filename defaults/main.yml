@@ -164,14 +164,15 @@ magnum_trustee_domain_admin_roles:
 magnum_cluster_user_trust: True
 
 # Glance images
-## Example Glance Image - Fedora Atomic
-#  - name: fedora-atomic-latest         #Name of the image in Glance
-#    disk_format: qcow2                 #Disk format (e.g. qcow2)
-#    image_format: bare                 #Image format
-#    public: true                       #Boolean - is the image public
-#    file: https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/31.20200210.3.0/x86_64/fedora-coreos-31.20200210.3.0-openstack.x86_64.qcow2.xz
-#    distro: fedora-atomic              #Value for the os_distro metadata
-#    checksum: "sha256:9a5252e24b82a5edb1ce75b05653f59895685b0f1028112462e908a12deae518"
+## Example Glance Image - Fedora CoreOS
+#  - name: fedora-coreos-latest
+#    disk_format: qcow2
+#    image_format: bare
+#    visibility: public
+#    url: https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/38.20230806.3.0/x86_64/fedora-coreos-38.20230806.3.0-openstack.x86_64.qcow2.xz
+#    properties:
+#      os_distro: "fedora-coreos"
+#    checksum: "da359b10f9aa165c4f81e6cd9ca5f81b"
 magnum_glance_images: []
 
 # Define cluster templates to create. It should be list of

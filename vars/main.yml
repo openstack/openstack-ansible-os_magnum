@@ -76,3 +76,26 @@ uwsgi_magnum_services: |-
   {%   endif %}
   {% endfor %}
   {{ services }}
+
+_magnum_glance_images_compat: |-
+  {% set images = [] %}
+  {% for image in magnum_glance_images %}
+  {%   if 'public' in image and image['public'] %}
+  {%     set _ = image.update({'visibility': 'public'}) %}
+  {%     set _ = image.pop('public')  %}
+  {%   endif %}
+  {%   if 'distro' in image %}
+  {%     set image_properties = image.get('properties', {}) %}
+  {%     set _ = image_properties.update({'os_distro': image.pop('distro')}) %}
+  {%     set _ = image.update({'properties': image_properties}) %}
+  {%   endif %}
+  {%   if 'file' in image and image['file'] is url %}
+  {%     set _ = image.update({'url': image.pop('file')}) %}
+  {%   endif %}
+  {# NOTE(noonedeadpunk): Glance requires image checksum to be in plain md5 only #}
+  {%   if 'checksum' in image and image['checksum'].split(':') | length > 1 %}
+  {%     set _ = image.pop('checksum') %}
+  {%   endif %}
+  {%   set _ = images.append(image) %}
+  {% endfor %}
+  {{ images }}
