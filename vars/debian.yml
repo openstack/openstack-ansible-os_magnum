@@ -16,7 +16,8 @@
 ## APT Cache options
 cache_timeout: 600
 
-magnum_distro_packages: []
+magnum_distro_packages:
+  - libxml2
 
 # Packages for buildind the python wheels
 magnum_devel_distro_packages:
