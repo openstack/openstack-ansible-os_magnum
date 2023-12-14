@@ -58,6 +58,7 @@ magnum_heat_service_region: "{{ magnum_service_region }}"
 magnum_neutron_service_region: "{{ magnum_service_region }}"
 magnum_nova_service_region: "{{ magnum_service_region }}"
 magnum_keystone_service_region: "{{ magnum_service_region }}"
+magnum_octavia_service_region: "{{ magnum_service_region }}"
 magnum_bind_port: 9511
 magnum_service_proto: http
 magnum_service_publicuri_proto: "{{ openstack_service_publicuri_proto | default(magnum_service_proto) }}"
