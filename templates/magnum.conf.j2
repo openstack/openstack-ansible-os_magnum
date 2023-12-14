@@ -73,6 +73,10 @@ endpoint_type = internalURL
 region_name = {{ magnum_nova_service_region }}
 endpoint_type = internalURL
 
+[octavia_client]
+region_name = {{ magnum_octavia_service_region }}
+endpoint_type = internalURL
+
 [oslo_messaging_notifications]
 driver = {{ (magnum_ceilometer_enabled | bool) | ternary('messagingv2', 'noop') }}
 transport_url = {{ magnum_oslomsg_notify_transport }}://{% for host in magnum_oslomsg_notify_servers.split(',') %}{{ magnum_oslomsg_notify_userid }}:{{ magnum_oslomsg_notify_password }}@{{ host }}:{{ magnum_oslomsg_notify_port }}{% if not loop.last %},{% else %}/{{ _magnum_oslomsg_notify_vhost_conf }}{% if magnum_oslomsg_notify_use_ssl | bool %}?ssl=1&ssl_version={{ magnum_oslomsg_notify_ssl_version }}&ssl_ca_file={{ magnum_oslomsg_notify_ssl_ca_file }}{% else %}?ssl=0{% endif %}{% endif %}{% endfor %}
