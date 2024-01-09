@@ -42,12 +42,12 @@ endpoint_type = internalURL
 
 [keystone_auth]
 auth_section = keystone_authtoken
+insecure = {{ keystone_service_internaluri_insecure | bool }}
 
 [keystone_authtoken]
 region_name = {{ magnum_keystone_service_region }}
 www_authenticate_uri = {{ keystone_service_internaluri }}
 auth_version = v3
-insecure = {{ keystone_service_internaluri_insecure | bool }}
 memcached_servers = {{ magnum_memcached_servers }}
 token_cache_time = 300
 auth_type = {{ magnum_keystone_auth_plugin }}
