@@ -1,0 +1,10 @@
+- job:
+    name: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
+    parent: openstack-ansible-deploy-aio
+    nodeset: osa-ubuntu-jammy-32GB
+    vars:
+      osa_pre_run_bootstrap: False
+    required-projects:
+      - name: openstack/openstack-ansible-ops
+    pre-run:
+      - zuul.d/playbooks/bootstrap-mcapi-vexxhost.yml

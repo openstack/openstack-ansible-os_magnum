@@ -1,0 +1,5 @@
+- nodeset:
+    name: osa-ubuntu-jammy-32GB
+    nodes:
+      - name: osa-ubuntu-jammy-32GB
+        label: ubuntu-jammy-32GB

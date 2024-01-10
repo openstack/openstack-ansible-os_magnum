@@ -1,5 +1,5 @@
 ---
-# Copyright 2017, Rackspace US, Inc.
+# Copyright 2024, BBC R&D.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- project:
-    templates:
-      - check-requirements
-      - openstack-ansible-linters-jobs
-      - openstack-ansible-deploy-aio_metal-jobs
-      - publish-openstack-docs-pti
-      - build-release-notes-jobs-python3
-    check:
-      jobs:
-        - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
-    gate:
-      jobs:
-        - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
+- name: Bootstrap configuration for Vexxhost magnum-cluster-api driver
+  hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Copy configuration files into place
+      ansible.builtin.copy:
+        src: "{{ ansible_user_dir }}/src/opendev.org/openstack/openstack-ansible-ops/mcapi_vexxhost/playbooks/files/openstack_deploy"
+        dest: '/etc/'
+        remote_src: true
