@@ -23,3 +23,9 @@
         src: "{{ ansible_user_dir }}/src/opendev.org/openstack/openstack-ansible-ops/mcapi_vexxhost/playbooks/files/openstack_deploy"
         dest: '/etc/'
         remote_src: true
+
+    - name: Add extra config to user variables
+      ansible.builtin.blockinfile:
+        path: "{{ item.path }}"
+        block: "{{ item.block }}"
+      with_items: "{{ mcapi_vexxhost_extra_user_variables | default([]) }}"
