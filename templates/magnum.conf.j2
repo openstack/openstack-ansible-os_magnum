@@ -86,6 +86,10 @@ ssl = {{ magnum_oslomsg_rpc_use_ssl }}
 rabbit_notification_exchange = magnum
 rabbit_notification_topic = notification
 rabbit_quorum_queue = {{ magnum_oslomsg_rabbit_quorum_queues }}
+rabbit_transient_quorum_queue = {{ magnum_oslomsg_rabbit_transient_quorum_queues }}
+rabbit_qos_prefetch_count = {{ magnum_oslomsg_rabbit_qos_prefetch_count }}
+use_queue_manager = {{ magnum_oslomsg_rabbit_queue_manager }}
+rabbit_stream_fanout = {{ magnum_oslomsg_rabbit_stream_fanout }}
 rabbit_quorum_delivery_limit = {{ magnum_oslomsg_rabbit_quorum_delivery_limit }}
 rabbit_quorum_max_memory_bytes = {{ magnum_oslomsg_rabbit_quorum_max_memory_bytes }}
 
