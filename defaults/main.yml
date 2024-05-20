@@ -131,6 +131,7 @@ magnum_oslomsg_rpc_ssl_version: "{{ oslomsg_rpc_ssl_version | default('TLSv1_2')
 magnum_oslomsg_rpc_ssl_ca_file: "{{ oslomsg_rpc_ssl_ca_file | default('') }}"
 
 # Notify
+magnum_oslomsg_notify_configure: "{{ oslomsg_notify_configure | default(magnum_ceilometer_enabled) }}"
 magnum_oslomsg_notify_host_group: "{{ oslomsg_notify_host_group | default('rabbitmq_all') }}"
 magnum_oslomsg_notify_setup_host: "{{ (magnum_oslomsg_notify_host_group in groups) | ternary(groups[magnum_oslomsg_notify_host_group][0], 'localhost') }}"
 magnum_oslomsg_notify_transport: "{{ oslomsg_notify_transport | default('rabbit') }}"

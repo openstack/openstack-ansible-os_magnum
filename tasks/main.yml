@@ -72,6 +72,7 @@
     _oslomsg_notify_vhost: "{{ magnum_oslomsg_notify_vhost }}"
     _oslomsg_notify_transport: "{{ magnum_oslomsg_notify_transport }}"
     _oslomsg_notify_policies: "{{ magnum_oslomsg_notify_policies }}"
+    _oslomsg_notify_configure: "{{ magnum_oslomsg_notify_configure }}"
   tags:
     - always
 
