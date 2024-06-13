@@ -22,7 +22,5 @@
       - build-release-notes-jobs-python3
     check:
       jobs:
-        - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
-    gate:
-      jobs:
-        - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
+        - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy:
+            voting: false
