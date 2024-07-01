@@ -24,3 +24,9 @@
       jobs:
         - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy:
             voting: false
+        - openstack-ansible-deploy-hosts_lxc_k8s-ubuntu-jammy:
+            voting: false
+        - openstack-ansible-deploy-hosts_lxc_k8s-debian-bookworm:
+            voting: false
+        - openstack-ansible-deploy-hosts_lxc_k8s-rockylinux-9:
+            voting: false
