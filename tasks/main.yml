@@ -171,7 +171,7 @@
 
 - name: Importing magnum_resources tasks
   import_tasks: magnum_resources.yml
-  when: _magnum_is_first_play_host
+  when: _magnum_is_last_play_host
   tags:
     - magnum-config
     - magnum-resources
