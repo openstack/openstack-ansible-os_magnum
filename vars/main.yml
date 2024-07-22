@@ -17,12 +17,12 @@
 _magnum_is_first_play_host: >-
   {{
     (magnum_services['magnum-api']['group'] in group_names and
-      inventory_hostname == (groups[magnum_services['magnum-api']['group']] | intersect(ansible_play_hosts)) | first) | bool
+      inventory_hostname == (groups[magnum_services['magnum-api']['group']] | select('in', ansible_play_hosts)) | first) | bool
   }}
 _magnum_is_last_play_host: >-
   {{
     (magnum_services['magnum-api']['group'] in group_names and
-      inventory_hostname == (groups[magnum_services['magnum-api']['group']] | intersect(ansible_play_hosts)) | last) | bool
+      inventory_hostname == (groups[magnum_services['magnum-api']['group']] | select('in', ansible_play_hosts)) | last) | bool
   }}
 _magnum_oslomsg_rpc_vhost_conf: >-
   {{
