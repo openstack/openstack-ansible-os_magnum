@@ -1,0 +1,37 @@
+---
+# Copyright 2024, BBC R&D.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Bootstrap configuration for Vexxhost magnum-cluster-api driver
+  hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Copy configuration files into place
+      ansible.builtin.copy:
+        src: "{{ ansible_user_dir }}/src/opendev.org/openstack/openstack-ansible-ops/mcapi_vexxhost/playbooks/files/openstack_deploy"
+        dest: '/etc/'
+        remote_src: true
+
+    - name: Copy h/a k8s specific configuration files into place
+      ansible.builtin.copy:
+        src: "{{ ansible_user_dir }}/src/opendev.org/openstack/openstack-ansible-ops/mcapi_vexxhost/playbooks/files/k8s-ha/"
+        dest: '/etc/openstack_deploy'
+        remote_src: true
+
+    - name: Add extra config to user variables
+      ansible.builtin.blockinfile:
+        path: "{{ item.path }}"
+        block: "{{ item.block }}"
+      with_items: "{{ mcapi_vexxhost_extra_user_variables | default([]) }}"

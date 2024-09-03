@@ -1,4 +1,5 @@
 - job:
+    # test a full deployment of openstack, k8s control plane, octavia, magnum+magnum_cluster_api
     name: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
     parent: openstack-ansible-deploy-aio
     nodeset: osa-ubuntu-jammy-32GB
@@ -8,3 +9,29 @@
       - name: openstack/openstack-ansible-ops
     pre-run:
       - zuul.d/playbooks/bootstrap-mcapi-vexxhost.yml
+
+- job:
+    # test a deployment of only the high-availability control plane k8s cluster
+    name: openstack-ansible-deploy-hosts_lxc_k8s-base
+    parent: openstack-ansible-deploy-aio-hosts
+    vars:
+      osa_pre_run_bootstrap: False
+    required-projects:
+      - name: openstack/openstack-ansible-ops
+    pre-run:
+      - zuul.d/playbooks/bootstrap-mcapi-k8s.yml
+
+- job:
+    name: openstack-ansible-deploy-hosts_lxc_k8s-ubuntu-jammy
+    parent: openstack-ansible-deploy-hosts_lxc_k8s-base
+    nodeset: ubuntu-jammy
+
+- job:
+    name: openstack-ansible-deploy-hosts_lxc_k8s-debian-bookworm
+    parent: openstack-ansible-deploy-hosts_lxc_k8s-base
+    nodeset: debian-bookworm
+
+- job:
+    name: openstack-ansible-deploy-hosts_lxc_k8s-rockylinux-9
+    parent: openstack-ansible-deploy-hosts_lxc_k8s-base
+    nodeset: rockylinux-9
