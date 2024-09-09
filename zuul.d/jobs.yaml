@@ -27,6 +27,11 @@
     nodeset: ubuntu-jammy
 
 - job:
+    name: openstack-ansible-deploy-hosts_lxc_k8s-ubuntu-noble
+    parent: openstack-ansible-deploy-hosts_lxc_k8s-base
+    nodeset: ubuntu-noble
+
+- job:
     name: openstack-ansible-deploy-hosts_lxc_k8s-debian-bookworm
     parent: openstack-ansible-deploy-hosts_lxc_k8s-base
     nodeset: debian-bookworm

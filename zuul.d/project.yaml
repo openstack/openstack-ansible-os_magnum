@@ -26,6 +26,8 @@
             voting: false
         - openstack-ansible-deploy-hosts_lxc_k8s-ubuntu-jammy:
             voting: false
+        - openstack-ansible-deploy-hosts_lxc_k8s-ubuntu-noble:
+            voting: false
         - openstack-ansible-deploy-hosts_lxc_k8s-debian-bookworm:
             voting: false
         - openstack-ansible-deploy-hosts_lxc_k8s-rockylinux-9:
