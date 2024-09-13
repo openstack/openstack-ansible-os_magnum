@@ -96,6 +96,9 @@ rabbit_stream_fanout = {{ magnum_oslomsg_rabbit_stream_fanout }}
 rabbit_quorum_delivery_limit = {{ magnum_oslomsg_rabbit_quorum_delivery_limit }}
 rabbit_quorum_max_memory_bytes = {{ magnum_oslomsg_rabbit_quorum_max_memory_bytes }}
 
+[oslo_concurrency]
+lock_path = /run/lock/{{ magnum_services['magnum-api']['service_name'] }}/uwsgi
+
 [profiler]
 enabled = false
 

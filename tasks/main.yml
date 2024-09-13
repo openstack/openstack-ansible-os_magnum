@@ -134,7 +134,7 @@
     systemd_group_name: "{{ magnum_system_group_name }}"
     systemd_tempd_prefix: openstack
     systemd_slice_name: magnum
-    systemd_lock_path: /var/lock/magnum
+    systemd_lock_dir: /run/lock
     systemd_service_cpu_accounting: true
     systemd_service_block_io_accounting: true
     systemd_service_memory_accounting: true
