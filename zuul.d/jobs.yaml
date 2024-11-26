@@ -1,6 +1,6 @@
 - job:
     # test a full deployment of openstack, k8s control plane, octavia, magnum+magnum_cluster_api
-    name: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
+    name: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-base
     parent: openstack-ansible-deploy-aio
     nodeset: osa-ubuntu-jammy-32GB
     vars:
@@ -9,6 +9,18 @@
       - name: openstack/openstack-ansible-ops
     pre-run:
       - zuul.d/playbooks/bootstrap-mcapi-vexxhost.yml
+
+- job:
+    # test a full deployment of mcapi on ubuntu jammy
+    name: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-jammy
+    parent: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-base
+    nodeset: osa-ubuntu-jammy-32GB
+
+- job:
+    # test a full deployment of mcapi on ubuntu jammy
+    name: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-noble
+    parent: openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-base
+    nodeset: osa-ubuntu-noble-32GB
 
 - job:
     # test a deployment of only the high-availability control plane k8s cluster
