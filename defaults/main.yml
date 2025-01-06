@@ -154,10 +154,6 @@ magnum_oslomsg_rabbit_queue_manager: "{{ oslomsg_rabbit_queue_manager | default(
 magnum_oslomsg_rabbit_quorum_delivery_limit: "{{ oslomsg_rabbit_quorum_delivery_limit | default(0) }}"
 magnum_oslomsg_rabbit_quorum_max_memory_bytes: "{{ oslomsg_rabbit_quorum_max_memory_bytes | default(0) }}"
 
-## (Qdrouterd) integration
-# TODO(ansmith): Change structure when more backends will be supported
-magnum_oslomsg_amqp1_enabled: "{{ magnum_oslomsg_rpc_transport == 'amqp' }}"
-
 # Keystone AuthToken/Middleware
 magnum_keystone_auth_plugin: password
 magnum_service_project_domain_name: Default
@@ -224,9 +220,6 @@ magnum_memcached_servers: "{{ memcached_servers }}"
 
 # Specific pip packages provided by the user
 magnum_user_pip_packages: []
-
-magnum_optional_oslomsg_amqp1_pip_packages:
-  - oslo.messaging[amqp1]
 
 # Store certificates in DB by default (x509keypair)
 # Other valid values are: barbican, local

@@ -91,8 +91,7 @@
     venv_install_destination_path: "{{ magnum_bin | dirname }}"
     venv_install_distro_package_list: "{{ magnum_distro_packages }}"
     venv_pip_install_args: "{{ magnum_pip_install_args }}"
-    venv_pip_packages: "{{ magnum_pip_packages | union(magnum_user_pip_packages) +
-    (magnum_oslomsg_amqp1_enabled | bool) | ternary(magnum_optional_oslomsg_amqp1_pip_packages, []) }}"
+    venv_pip_packages: "{{ magnum_pip_packages | union(magnum_user_pip_packages) }}"
     venv_facts_when_changed:
       - section: "magnum"
         option: "venv_tag"
