@@ -41,7 +41,7 @@
       - name: "{{ magnum_trustee_domain_admin_name }}"
         password: "{{ magnum_trustee_password }}"
         domain: "{{ magnum_trustee_domain_name }}"
-        project: ''
+        project: ""
         role: "{{ magnum_trustee_domain_admin_roles }}"
     _service_endpoints:
       - service: "{{ magnum_service_name }}"

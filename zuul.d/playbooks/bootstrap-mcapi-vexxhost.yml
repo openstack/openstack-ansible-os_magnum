@@ -15,13 +15,13 @@
 
 - name: Bootstrap configuration for Vexxhost magnum-cluster-api driver
   hosts: all
-  become: yes
+  become: true
   become_user: root
   tasks:
     - name: Copy configuration files into place
       ansible.builtin.copy:
         src: "{{ ansible_user_dir }}/src/opendev.org/openstack/openstack-ansible-ops/mcapi_vexxhost/playbooks/files/openstack_deploy"
-        dest: '/etc/'
+        dest: "/etc/"
         remote_src: true
 
     - name: Add extra config to user variables

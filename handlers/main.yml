@@ -17,9 +17,9 @@
 - name: Restart magnum services
   systemd:
     name: "{{ item.service_name }}"
-    enabled: yes
+    enabled: true
     state: "restarted"
-    daemon_reload: yes
+    daemon_reload: true
   with_items: "{{ filtered_magnum_services }}"
   listen:
     - "venv changed"

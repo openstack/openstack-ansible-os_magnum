@@ -14,7 +14,7 @@
 # limitations under the License.
 
 ## Verbosity Options
-debug: False
+debug: false
 
 # python venv executable
 magnum_venv_python_executable: "{{ openstack_venv_python_executable | default('python3') }}"
@@ -164,7 +164,7 @@ magnum_trustee_domain_admin_name: trustee_domain_admin
 magnum_trustee_domain_name: magnum
 magnum_trustee_domain_admin_roles:
   - admin
-magnum_cluster_user_trust: True
+magnum_cluster_user_trust: true
 
 # Glance images
 ## Example Glance Image - Fedora CoreOS
@@ -240,7 +240,7 @@ magnum_services:
     service_name: magnum-api
     init_config_overrides: "{{ magnum_api_init_config_overrides }}"
     start_order: 2
-    wsgi_app: True
+    wsgi_app: true
     wsgi_path: "{{ magnum_bin }}/magnum-api-wsgi"
     uwsgi_overrides: "{{ magnum_api_uwsgi_ini_overrides }}"
     uwsgi_port: "{{ magnum_bind_port }}"
@@ -281,7 +281,7 @@ magnum_pki_setup_host: "{{ openstack_pki_setup_host | default('localhost') }}"
 magnum_pki_keys_path: "{{ magnum_pki_dir ~ '/certs/private/' }}"
 magnum_pki_certs_path: "{{ magnum_pki_dir ~ '/certs/certs/' }}"
 magnum_pki_intermediate_cert_name: "{{ openstack_pki_service_intermediate_cert_name | default('ExampleCorpIntermediate') }}"
-magnum_pki_regen_cert: ''
+magnum_pki_regen_cert: ""
 magnum_pki_san: "{{ openstack_pki_san | default('DNS:' ~ ansible_facts['hostname'] ~ ',IP:' ~ management_address) }}"
 magnum_pki_certificates:
   - name: "magnum_{{ ansible_facts['hostname'] }}"
