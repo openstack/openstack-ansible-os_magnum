@@ -53,7 +53,7 @@
     - magnum-policy-override
 
 - name: Remove legacy policy.yaml file
-  file:
+  ansible.builtin.file:
     path: "{{ magnum_etc_directory }}/policy.yaml"
     state: absent
   when:

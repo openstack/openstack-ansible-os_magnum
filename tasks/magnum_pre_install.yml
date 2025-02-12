@@ -14,13 +14,13 @@
 # limitations under the License.
 
 - name: Create the Magnum system group
-  group:
+  ansible.builtin.group:
     name: "{{ magnum_system_group_name }}"
     state: "present"
     system: "yes"
 
 - name: Create the Magnum system user
-  user:
+  ansible.builtin.user:
     name: "{{ magnum_system_user_name }}"
     group: "{{ magnum_system_group_name }}"
     comment: "{{ magnum_system_user_comment }}"
@@ -30,7 +30,7 @@
     home: "{{ magnum_system_user_home }}"
 
 - name: Create Magnum's directories
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: "directory"
     owner: "{{ item.owner | default(magnum_system_user_name) }}"

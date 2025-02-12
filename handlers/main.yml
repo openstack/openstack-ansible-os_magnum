@@ -15,7 +15,7 @@
 # limitations under the License.
 
 - name: Restart magnum services
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item.service_name }}"
     enabled: true
     state: "restarted"

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Wait for magnum endpoint to become reachable
-  uri:
+  ansible.builtin.uri:
     url: "{{ magnum_service_internalurl }}"
   register: result
   until: "result.status == 200"
