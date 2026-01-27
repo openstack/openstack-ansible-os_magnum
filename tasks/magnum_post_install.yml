@@ -47,16 +47,5 @@
     group: "{{ magnum_system_group_name }}"
     mode: "0644"
     config_type: "yaml"
-  when:
-    - magnum_policy_overrides | length > 0
-  tags:
-    - magnum-policy-override
-
-- name: Remove legacy policy.yaml file
-  ansible.builtin.file:
-    path: "{{ magnum_etc_directory }}/policy.yaml"
-    state: absent
-  when:
-    - magnum_policy_overrides | length == 0
   tags:
     - magnum-policy-override
