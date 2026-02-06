@@ -67,6 +67,9 @@ endpoint_type = internalURL
 [nova_client]
 region_name = {{ magnum_nova_service_region }}
 endpoint_type = internalURL
+{% if magnum_k8s_driver == 'vexxhost' %}
+api_version = 2.15
+{% endif %}
 
 [octavia_client]
 region_name = {{ magnum_octavia_service_region }}
@@ -107,3 +110,20 @@ trustee_keystone_region_name = {{ magnum_service_region }}
 
 [certificates]
 cert_manager_type = {{ magnum_cert_manager_type }}
+
+{% if magnum_k8s_driver in ['vexxhost', 'helm'] %}
+[drivers]
+# Supply a custom CA file which will be passed and used exclusively on all workload nodes
+# System trust will be used by default
+openstack_ca_file = {{ magnum_capi_ca_file }}
+
+[capi_client]
+# Supply a CA that will be used exclusively for connections towards
+# OpenStack public and internal endpoints.
+ca_file = {{ magnum_capi_ca_file }}
+endpoint = internalURL
+
+[cluster_template]
+kubernetes_allowed_network_drivers = {{ ','.join(magnum_capi_network_drivers) }}
+kubernetes_default_network_driver = {{ magnum_capi_network_driver_default }}
+{% endif %}

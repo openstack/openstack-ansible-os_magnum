@@ -81,6 +81,17 @@
   tags:
     - magnum-install
 
+- name: Install Magnum CAPI pre-requisites
+  ansible.builtin.include_tasks:
+    file: magnum_capi_install.yml
+    apply:
+      tags:
+        - magnum-install
+  when:
+    - magnum_k8s_driver in ['vexxhost', 'helm']
+  tags:
+    - magnum-install
+
 - name: Install the python venv
   ansible.builtin.import_role:
     name: "python_venv_build"
@@ -91,11 +102,13 @@
     venv_install_destination_path: "{{ magnum_bin | dirname }}"
     venv_install_distro_package_list: "{{ magnum_distro_packages }}"
     venv_pip_install_args: "{{ magnum_pip_install_args }}"
-    venv_pip_packages: "{{ magnum_pip_packages | union(magnum_user_pip_packages) }}"
+    venv_pip_packages: "{{ magnum_pip_packages | union(magnum_capi_pip_packages) | union(magnum_user_pip_packages) }}"
+    venv_pip_install_env: "{{ magnum_pip_install_env }}"
     venv_facts_when_changed:
       - section: "magnum"
         option: "venv_tag"
         value: "{{ magnum_venv_tag }}"
+    venv_build_requirements_extra: "{{ magnum_capi_build_requirements }}"
   tags:
     - magnum-install
 
@@ -168,6 +181,7 @@
 
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
+
 - name: Importing magnum_resources tasks
   ansible.builtin.import_tasks: magnum_resources.yml
   when: _magnum_is_last_play_host

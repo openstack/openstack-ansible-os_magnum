@@ -22,11 +22,13 @@
       - build-release-notes-jobs-python3
     check:
       jobs:
-        - openstack-ansible-deploy-aio_magnum_octavia_capi_kvm-ubuntu-noble:
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble-v1.34.6
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie-v1.34.6:
             voting: false
-        - openstack-ansible-deploy-hosts_lxc_capi_k8sHA-ubuntu-noble:
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10-v1.34.6:
             voting: false
-        - openstack-ansible-deploy-hosts_lxc_capi_k8sHA-debian-trixie:
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-centos-10-stream-v1.34.6:
             voting: false
-        - openstack-ansible-deploy-hosts_lxc_capi_k8sHA-rockylinux-10:
-            voting: false
+    gate:
+      jobs:
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble-v1.34.6

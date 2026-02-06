@@ -1,0 +1,17 @@
+---
+# Pick a range of addresses for cilium that do not collide with anything else
+cilium_ipv4_cidr: 172.29.200.0/22
+
+# Set a clusterctl version. Supported list can be found in defaults:
+# https://github.com/adriacloud/ansible-collection-kubernetes/blob/main/roles/clusterctl/defaults/main.yml
+clusterctl_version: 1.10.5
+cluster_api_version: 1.10.5
+cluster_api_infrastructure_provider: openstack
+cluster_api_infrastructure_version: 0.12.4
+
+# Define k8s version for the control cluster
+kubernetes_version: 1.33.5
+
+# Enable periodic cluster API state collection (note: this is not a guaranteed functional backup)
+# See https://cluster-api.sigs.k8s.io/clusterctl/commands/move
+cluster_api_backups_enabled: False

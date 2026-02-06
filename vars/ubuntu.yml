@@ -42,7 +42,7 @@ magnum_devel_distro_packages:
   - build-essential
 
 magnum_rust_distro_packages:
-  - cargo
-  - rustc
+  - cargo-1.89
+  - rustc-1.89
 
-magnum_rust_binary_symlinks: false
+magnum_rust_binary_symlinks: true

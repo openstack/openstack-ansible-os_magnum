@@ -81,6 +81,7 @@ magnum_api_paste_ini_overrides: {}
 magnum_keystone_auth_default_policy: []
 
 magnum_pip_install_args: "{{ pip_install_options | default('') }}"
+magnum_pip_install_env: "{{ {'REQUESTS_CA_BUNDLE': _venv_install_ca_bundle_path} | combine(_magnum_pip_install_env | default({})) }}"
 
 # Name of the virtual env to deploy into
 magnum_venv_tag: "{{ venv_tag | default('untagged') }}"
@@ -203,6 +204,9 @@ magnum_cluster_templates: []
 #     disk: 5
 magnum_flavors: []
 
+# Available drivers: "vexxhost", "helm" and "heat".
+magnum_k8s_driver: heat
+
 # Set the directory where the downloaded images will be stored
 # on the magnum_service_setup_host host. If the host is localhost,
 # then the user running the playbook must have access to it.
@@ -318,3 +322,18 @@ magnum_pki_install_certificates:
 # Define user-provided SSL certificates
 magnum_user_ssl_cert: ""
 magnum_user_ssl_key: ""
+
+# Cluster API
+magnum_capi_control_cluster_group: k8s_all
+magnum_capi_ca_file: "{{ _magnum_capi_ca_file }}"
+magnum_capi_pip_packages: "{{ _magnum_capi_pip_packages | default([]) }}"
+magnum_capi_build_requirements: "{{ _magnum_capi_build_requirements | default([]) }}"
+magnum_capi_network_driver_default: "calico"
+magnum_capi_network_drivers:
+  - "calico"
+
+# Cluster API Vexxhost defaults
+magnum_capi_vexxhost_git_install_branch: main
+magnum_capi_vexxhost_git_repo: https://github.com/vexxhost/magnum-cluster-api
+magnum_capi_vexxhost_rust_cargo_config_path: "/root/.cargo/config.toml"
+magnum_capi_vexxhost_rust_cargo_config: ""
