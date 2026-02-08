@@ -41,7 +41,7 @@ insecure = {{ keystone_service_internaluri_insecure | bool }}
 
 [keystone_authtoken]
 region_name = {{ magnum_keystone_service_region }}
-www_authenticate_uri = {{ keystone_service_internaluri }}
+www_authenticate_uri = {{ keystone_service_publicuri }}
 auth_version = v3
 memcached_servers = {{ magnum_memcached_servers }}
 token_cache_time = 300
