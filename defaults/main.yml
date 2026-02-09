@@ -243,7 +243,7 @@ magnum_services:
     init_config_overrides: "{{ magnum_api_init_config_overrides }}"
     start_order: 2
     wsgi_app: true
-    wsgi_path: "{{ magnum_bin }}/magnum-api-wsgi"
+    wsgi: "magnum.wsgi.api:application"
     uwsgi_overrides: "{{ magnum_api_uwsgi_ini_overrides }}"
     uwsgi_port: "{{ magnum_bind_port }}"
     uwsgi_bind_address: "{{ magnum_api_uwsgi_bind_address }}"
