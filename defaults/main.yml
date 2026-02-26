@@ -341,6 +341,32 @@ magnum_capi_vexxhost_git_repo: https://github.com/vexxhost/magnum-cluster-api
 magnum_capi_vexxhost_rust_cargo_config_path: "/root/.cargo/config.toml"
 magnum_capi_vexxhost_rust_cargo_config: ""
 
+# Cluster API Vexxhost proxy defaults
+magnum_capi_vexxhost_proxy_system_group_name: 'capi_proxy'
+magnum_capi_vexxhost_proxy_system_user_name: 'capi_proxy'
+magnum_capi_vexxhost_proxy_system_user_comment: 'Magnum Cluster API Proxy System User'
+magnum_capi_vexxhost_proxy_system_user_home: '/var/lib/{{ magnum_capi_vexxhost_proxy_system_user_name }}'
+magnum_capi_vexxhost_proxy_system_user_shell: '/bin/false'
+
+magnum_capi_vexxhost_proxy_upper_constraints_url: >-
+  {{ requirements_git_url | default('https://releases.openstack.org/constraints/upper/' ~ requirements_git_install_branch | default('master')) }}
+magnum_capi_vexxhost_proxy_git_constraints:
+  - "--constraint {{ magnum_capi_vexxhost_proxy_upper_constraints_url }}"
+
+magnum_capi_vexxhost_proxy_install_branch: "{{ magnum_capi_vexxhost_git_install_branch | default('main') }}"
+magnum_capi_vexxhost_proxy_git_repo: "{{ magnum_capi_vexxhost_git_repo }}"
+
+magnum_capi_vexxhost_proxy_pip_packages:
+  - "{{ 'magnum-cluster-api@git+' ~ magnum_capi_vexxhost_proxy_git_repo ~ '@' ~ magnum_capi_vexxhost_proxy_install_branch }}"
+
+magnum_capi_vexxhost_proxy_venv_tag: "{{ venv_tag | default('untagged') }}"
+magnum_capi_vexxhost_proxy_bin: "/openstack/venvs/magnum-cluster-api-proxy-{{ magnum_capi_vexxhost_proxy_venv_tag }}/bin"
+
+magnum_capi_vexxhost_k8s_conf_src: "{{ k8s_admin_conf_src | default('/etc/kubernetes/admin.conf') }}"
+magnum_capi_vexxhost_k8s_conf_dest: "{{ k8s_admin_conf_dest | default(magnum_capi_vexxhost_proxy_system_user_home ~ '/.kube/config') }}"
+
+magnum_capi_vexxhost_proxy_environment: {}
+
 # Cluster API Azimuth HELM defaults
 magnum_capi_azimuth_git_install_branch: master
 magnum_capi_azimuth_git_repo: https://opendev.org/openstack/magnum-capi-helm

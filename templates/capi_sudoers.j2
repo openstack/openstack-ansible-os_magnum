@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+
+Defaults:{{ magnum_capi_vexxhost_proxy_system_user_name }} !requiretty
+Defaults:{{ magnum_capi_vexxhost_proxy_system_user_name }} secure_path="{{ magnum_capi_vexxhost_proxy_bin }}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+{{ magnum_capi_vexxhost_proxy_system_user_name }} ALL = (root) NOPASSWD: {{ magnum_capi_vexxhost_proxy_bin }}/privsep-helper

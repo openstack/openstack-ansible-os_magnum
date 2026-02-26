@@ -25,3 +25,17 @@
     - "venv changed"
     - "systemd service changed"
     - "cert installed"
+
+# NOTE: when condition is a bit hacky - ideally there would be a relevant
+# higher level group
+- name: Restart magnum_cluster_api_proxy service
+  ansible.builtin.systemd:
+    name: "magnum-cluster-api-proxy"
+    enabled: true
+    state: "restarted"
+    daemon_reload: true
+  when: inventory_hostname not in groups['magnum_all']
+  listen:
+    - "venv changed"
+    - "systemd service changed"
+    - "k8s config changed"
