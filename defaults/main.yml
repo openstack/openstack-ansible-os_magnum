@@ -284,12 +284,14 @@ magnum_pki_keys_path: "{{ magnum_pki_dir ~ '/certs/private/' }}"
 magnum_pki_certs_path: "{{ magnum_pki_dir ~ '/certs/certs/' }}"
 magnum_pki_intermediate_cert_name: "{{ openstack_pki_service_intermediate_cert_name | default('ExampleCorpIntermediate') }}"
 magnum_pki_regen_cert: ""
-magnum_pki_san: "{{ openstack_pki_san | default('DNS:' ~ ansible_facts['hostname'] ~ ',IP:' ~ management_address) }}"
+magnum_pki_san: "{{ openstack_pki_san | default({'dns': [ansible_facts['hostname']], 'ip': [management_address]}) }}"
+magnum_pki_backend: "{{ openstack_pki_backend | default('standalone') }}"
 magnum_pki_certificates:
   - name: "magnum_{{ ansible_facts['hostname'] }}"
-    provider: ownca
     cn: "{{ ansible_facts['hostname'] }}"
     san: "{{ magnum_pki_san }}"
+    # standalone backend only
+    provider: ownca
     signed_by: "{{ magnum_pki_intermediate_cert_name }}"
 
 # magnum destination files for SSL certificates
@@ -298,17 +300,21 @@ magnum_ssl_key: /etc/magnum/magnum.key
 
 # Installation details for SSL certificates
 magnum_pki_install_certificates:
-  - src: "{{ magnum_user_ssl_cert | default(magnum_pki_certs_path ~ 'magnum_' ~ ansible_facts['hostname'] ~ '-chain.crt') }}"
+  - name: "magnum_{{ ansible_facts['hostname'] }}"
+    type: "certificate_chain"
     dest: "{{ magnum_ssl_cert }}"
     owner: "{{ magnum_system_user_name }}"
     group: "{{ magnum_system_user_name }}"
-    mode: "0644"
-  - src: "{{ magnum_user_ssl_key | default(magnum_pki_keys_path ~ 'magnum_' ~ ansible_facts['hostname'] ~ '.key.pem') }}"
+    # standalone backend only
+    src: "{{ magnum_user_ssl_cert | default(magnum_pki_certs_path ~ 'magnum_' ~ ansible_facts['hostname'] ~ '-chain.crt') }}"
+  - name: "magnum_{{ ansible_facts['hostname'] }}"
+    type: "private_key"
     dest: "{{ magnum_ssl_key }}"
     owner: "{{ magnum_system_user_name }}"
     group: "{{ magnum_system_user_name }}"
-    mode: "0600"
+    # standalone backend only
+    src: "{{ magnum_user_ssl_key | default(magnum_pki_keys_path ~ 'magnum_' ~ ansible_facts['hostname'] ~ '.key.pem') }}"
 
 # Define user-provided SSL certificates
-# magnum_user_ssl_cert: <path to cert on ansible deployment host>
-# magnum_user_ssl_key: <path to cert on ansible deployment host>
+magnum_user_ssl_cert: ""
+magnum_user_ssl_key: ""

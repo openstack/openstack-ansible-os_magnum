@@ -108,9 +108,10 @@
         - magnum-config
         - pki
   vars:
+    pki_backend: "{{ magnum_pki_backend }}"
     pki_setup_host: "{{ magnum_pki_setup_host }}"
     pki_dir: "{{ magnum_pki_dir }}"
-    pki_create_certificates: "{{ magnum_user_ssl_cert is not defined and magnum_user_ssl_key is not defined }}"
+    pki_create_certificates: "{{ magnum_user_ssl_cert | length == 0 and magnum_user_ssl_key | length == 0 }}"
     pki_regen_cert: "{{ magnum_pki_regen_cert }}"
     pki_certificates: "{{ magnum_pki_certificates }}"
     pki_install_certificates: "{{ magnum_pki_install_certificates }}"
