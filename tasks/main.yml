@@ -88,7 +88,7 @@
       tags:
         - magnum-install
   when:
-    - magnum_k8s_driver in ['vexxhost', 'helm']
+    - magnum_k8s_driver in ['vexxhost', 'azimuth']
   tags:
     - magnum-install
 
