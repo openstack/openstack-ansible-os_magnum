@@ -1,5 +1,5 @@
 ---
 magnum_k8s_driver: "vexxhost"
 
-magnum_capi_vexxhost_git_install_branch: v0.33.0
+magnum_capi_vexxhost_git_install_branch: v0.36.6
 magnum_capi_vexxhost_git_repo: "{{ openstack_github_base_url | default('https://github.com') ~ '/vexxhost/magnum-cluster-api' }}"

@@ -1,0 +1,21 @@
+---
+magnum_k8s_driver: "azimuth"
+
+magnum_capi_azimuth_git_install_branch: master
+magnum_capi_azimuth_git_repo: "{{ openstack_opendev_base_url | default('https://opendev.org') ~ '/openstack/magnum-capi-helm' }}"
+
+magnum_capi_azimuth_helm_base_url: https://azimuth-cloud.github.io
+magnum_capi_azimuth_helm_addon_provider_version: 0.10.4
+magnum_capi_azimuth_helm_charts_version: 0.22.0
+
+magnum_config_overrides:
+  cinder:
+    default_docker_volume_type: "{{ cinder_default_volume_type }}"
+    default_etcd_volume_type: "{{ cinder_default_volume_type }}"
+    default_boot_volume_type: "{{ cinder_default_volume_type }}"
+    default_boot_volume_size: 30
+  docker_registry:
+    swift_region: "{{ magnum_service_region }}"
+  capi_helm:
+    csi_cinder_default_volume_type: "{{ cinder_default_volume_type }}"
+    default_helm_chart_version: "{{ magnum_capi_azimuth_helm_charts_version }}"
