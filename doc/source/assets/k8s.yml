@@ -1,0 +1,4 @@
+cluster_api_hosts:
+  aio1:
+    ip: 172.29.236.100
+    management_ip: 172.29.236.100

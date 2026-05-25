@@ -1,5 +1,5 @@
 ---
-# Copyright 2017, Red Hat, Inc.
+# Copyright 2025, BBC R&D
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,26 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Common packages
-magnum_distro_packages:
-  - libxml2
-
-_magnum_capi_ca_file: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
-
-# Packages for building the python wheels
-magnum_devel_distro_packages:
-  - openssl-devel
-  - libxml2-devel
-  - libxslt-devel
-  - postgresql-devel
-  - git
-  - libffi-devel
-  - gettext
-  - gcc
-  - systemd-devel
-
-magnum_rust_distro_packages:
-  - cargo
-  - rust
-
-magnum_rust_binary_symlinks: false
+- name: Install rust on build host(s)
+  ansible.builtin.include_tasks:
+    file: "magnum_capi_vexxhost_rust.yml"
+    apply:
+      tags:
+        - rust-install
+  vars:
+    build_host: "{{ rust_host }}"
+  run_once: true
+  loop: "{{ groups.get('repo_all', []) + groups[magnum_services['magnum-conductor']['group']] }}"
+  loop_control:
+    loop_var: rust_host
+  tags:
+    - rust-install

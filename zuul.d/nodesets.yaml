@@ -4,3 +4,21 @@
     nodes:
       - name: osa-ubuntu-noble-32GB
         label: ubuntu-noble-32GB
+
+- nodeset:
+    name: osa-debian-trixie-16GB
+    nodes:
+      - name: osa-debian-trixie-16GB
+        label: debian-trixie-16GB
+
+- nodeset:
+    name: osa-rockylinux-10-16GB
+    nodes:
+      - name: osa-rockylinux-10-16GB
+        label: rockylinux-10-16GB
+
+- nodeset:
+    name: osa-centos-10-stream-16GB
+    nodes:
+      - name: osa-centos-10-stream-16GB
+        label: centos-10-stream-16GB

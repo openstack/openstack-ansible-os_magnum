@@ -1,5 +1,5 @@
 ---
-# Copyright 2017, Red Hat, Inc.
+# Copyright 2026, Adria Cloud Services.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,26 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Common packages
-magnum_distro_packages:
-  - libxml2
+_magnum_capi_pip_packages:
+  - "magnum-cluster-api@git+{{ magnum_capi_vexxhost_git_repo }}@{{ magnum_capi_vexxhost_git_install_branch }}"
 
-_magnum_capi_ca_file: /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+_magnum_capi_build_requirements:
+  - maturin<2.0.0
 
-# Packages for building the python wheels
-magnum_devel_distro_packages:
-  - openssl-devel
-  - libxml2-devel
-  - libxslt-devel
-  - postgresql-devel
-  - git
-  - libffi-devel
-  - gettext
-  - gcc
-  - systemd-devel
-
-magnum_rust_distro_packages:
-  - cargo
-  - rust
-
-magnum_rust_binary_symlinks: false
+_magnum_pip_install_env:
+  PATH: "{{ magnum_bin }}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
