@@ -1,52 +1,66 @@
 ---
 - job:
     # test a full deployment of mcapi on ubuntu noble
-    name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble
+    name: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-ubuntu-noble
     parent: openstack-ansible-deploy-aio
     nodeset: osa-ubuntu-noble-32GB
 
 - job:
     # test a full deployment of mcapi on debian trixie
-    name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie
+    name: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-debian-trixie
     parent: openstack-ansible-deploy-aio
     nodeset: osa-debian-trixie-16GB
 
 - job:
     # test a full deployment of mcapi on rocky linux 10
-    name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10
+    name: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-rockylinux-10
     parent: openstack-ansible-deploy-aio
     nodeset: osa-rockylinux-10-16GB
 
 - job:
     # test a full deployment of mcapi on centos stream 10
-    name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-centos-10-stream
+    name: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-centos-10-stream
     parent: openstack-ansible-deploy-aio
     nodeset: osa-centos-10-stream-16GB
 
 - job:
     name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble-v1.34.6
-    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble
+    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-ubuntu-noble
     vars:
       zuul_job_vars:
         kubernetes_version: v1.34.6
 
 - job:
+    name: openstack-ansible-deploy-aio_k8s_magnum_capi_azimuth_octavia_kvm-ubuntu-noble-v1.35.2
+    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-ubuntu-noble
+    vars:
+      zuul_job_vars:
+        kubernetes_version: v1.35.2
+
+- job:
     name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie-v1.34.6
-    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie
+    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-debian-trixie
     vars:
       zuul_job_vars:
         kubernetes_version: v1.34.6
 
 - job:
     name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10-v1.34.6
-    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10
+    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-rockylinux-10
     vars:
       zuul_job_vars:
         kubernetes_version: v1.34.6
 
 - job:
+    name: openstack-ansible-deploy-aio_k8s_magnum_capi_azimuth_octavia_kvm-rockylinux-10-v1.35.2
+    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-rockylinux-10
+    vars:
+      zuul_job_vars:
+        kubernetes_version: v1.35.2
+
+- job:
     name: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-centos-10-stream-v1.34.6
-    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-centos-10-stream
+    parent: openstack-ansible-deploy-aio_k8s_magnum_capi_octavia_kvm-centos-10-stream
     vars:
       zuul_job_vars:
         kubernetes_version: v1.34.6

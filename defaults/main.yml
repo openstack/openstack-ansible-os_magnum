@@ -204,7 +204,10 @@ magnum_cluster_templates: []
 #     disk: 5
 magnum_flavors: []
 
-# Available drivers: "vexxhost", "helm" and "heat".
+# Available drivers:
+# - "vexxhost" - named as k8s_cluster_api in Magnum
+# - "azimuth" - named as k8s_capi_helm in Magnum
+# - "heat" - deprecated since 2025.1, removed in 2026.2
 magnum_k8s_driver: heat
 
 # Set the directory where the downloaded images will be stored
@@ -337,3 +340,23 @@ magnum_capi_vexxhost_git_install_branch: main
 magnum_capi_vexxhost_git_repo: https://github.com/vexxhost/magnum-cluster-api
 magnum_capi_vexxhost_rust_cargo_config_path: "/root/.cargo/config.toml"
 magnum_capi_vexxhost_rust_cargo_config: ""
+
+# Cluster API Azimuth HELM defaults
+magnum_capi_azimuth_git_install_branch: master
+magnum_capi_azimuth_git_repo: https://opendev.org/openstack/magnum-capi-helm
+magnum_capi_azimuth_helm_base_url: https://azimuth-cloud.github.io
+magnum_capi_azimuth_helm_addon_provider_version: 0.10.4
+magnum_capi_azimuth_helm_charts_version: 0.22.0
+magnum_capi_azimuth_helm_charts:
+  - name: cluster-api-addon-provider
+    namespace: addon-namespace
+    repo_url: "{{ magnum_capi_azimuth_helm_base_url }}/cluster-api-addon-provider"
+    version: "{{ magnum_capi_azimuth_helm_addon_provider_version }}"
+  - name: etcd-defrag
+    namespace: "addon-namespace"
+    repo_url: "{{ magnum_capi_azimuth_helm_base_url }}/capi-helm-charts"
+    version: "{{ magnum_capi_azimuth_helm_charts_version }}"
+  - name: cluster-addons
+    namespace: "addon-namespace"
+    repo_url: "{{ magnum_capi_azimuth_helm_base_url }}/capi-helm-charts"
+    version: "{{ magnum_capi_azimuth_helm_charts_version }}"
