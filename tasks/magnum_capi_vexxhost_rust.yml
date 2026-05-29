@@ -25,6 +25,7 @@
     - name: Install rust dependencies
       ansible.builtin.package:
         name: "{{ magnum_rust_distro_packages }}"
+        default_release: "{{ magnum_rust_distro_package_release | default(omit) }}"
 
     # Required where update-alternatives not available on Ubuntu, and LTS versions too old
     - name: Install symlinks for installed dependencies

@@ -45,4 +45,6 @@ magnum_rust_distro_packages:
   - cargo
   - rustc
 
+magnum_rust_distro_package_release: "{{ ansible_facts['distribution_release'] ~ '-backports' }}"
+
 magnum_rust_binary_symlinks: false
