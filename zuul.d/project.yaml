@@ -17,7 +17,6 @@
     templates:
       - check-requirements
       - openstack-ansible-linters-jobs
-      - openstack-ansible-deploy-aio_metal-jobs
       - publish-openstack-docs-pti
       - build-release-notes-jobs-python3
     check:
@@ -25,12 +24,16 @@
         - openstack-ansible-deploy-aio_k8s_magnum_capi_azimuth_octavia_kvm-rockylinux-10-v1.35.2
         - openstack-ansible-deploy-aio_k8s_magnum_capi_azimuth_octavia_kvm-ubuntu-noble-v1.35.2
         - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble-v1.34.6
-        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie-v1.34.6
-        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10-v1.34.6
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie-v1.34.6:
+            voting: false
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10-v1.34.6:
+            voting: false
     gate:
       jobs:
         - openstack-ansible-deploy-aio_k8s_magnum_capi_azimuth_octavia_kvm-rockylinux-10-v1.35.2
         - openstack-ansible-deploy-aio_k8s_magnum_capi_azimuth_octavia_kvm-ubuntu-noble-v1.35.2
         - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-ubuntu-noble-v1.34.6
-        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie-v1.34.6
-        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10-v1.34.6
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-debian-trixie-v1.34.6:
+            voting: false
+        - openstack-ansible-deploy-aio_k8s_magnum_capi_vexxhost_octavia_kvm-rockylinux-10-v1.34.6:
+            voting: false

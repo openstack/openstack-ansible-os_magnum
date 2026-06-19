@@ -13,8 +13,8 @@ for `os_magnum <https://github.com/openstack/openstack-ansible-os_magnum>`_.
    Heat driver has been deprecated by Magnum team in 2025.1 (Epoxy) release
    and is completely removed in 2026.2 (Hibiscus) release.
 
-   All new deployments should define ``magnum_k8s_driver`` to ``vexxhost`` or
-   ``azimuth`` and avoid ``heat`` driver if possible.
+   All new deployments must define ``magnum_k8s_driver`` to one of supported
+   drivers (``vexxhost`` or ``azimuth``).
 
 Design and Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~

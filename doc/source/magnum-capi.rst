@@ -11,7 +11,7 @@ Magnum Cluster API drivers
 About
 -----
 
-With deprecation of Heat driver during 2025.1 (Antelope) release, preliminary
+With removal of Heat driver during 2026.2 (Hibiscus) release, preliminary
 Magnum deployment is assumed to be performed through one of the third-party
 drivers.
 

@@ -13,6 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Verify that a Magnum driver is defined
+  ansible.builtin.fail:
+    msg: |
+      Variable `magnum_k8s_driver` is undefined.
+      Heat driver has been removed from Magnum code in 2026.2 (Hibiscus) release.
+      You need to select on of the supported drivers (`vexxhost` or `azimuth`) explicitly
+      before proceeding with deployment.
+  when:
+    - magnum_k8s_driver not in ['vexxhost', 'azimuth']
+
 - name: Gather variables for each operating system
   ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:

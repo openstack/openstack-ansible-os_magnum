@@ -207,8 +207,7 @@ magnum_flavors: []
 # Available drivers:
 # - "vexxhost" - named as k8s_cluster_api in Magnum
 # - "azimuth" - named as k8s_capi_helm in Magnum
-# - "heat" - deprecated since 2025.1, removed in 2026.2
-magnum_k8s_driver: heat
+magnum_k8s_driver:
 
 # Set the directory where the downloaded images will be stored
 # on the magnum_service_setup_host host. If the host is localhost,

@@ -1,0 +1,7 @@
+---
+upgrade:
+  - |
+    Magnum has removed Heat driver from it's code for 2026.2 (Hibiscus)
+    release. From now on, operators must select a driver implementing k8s
+    capabilities explicitly by defining ``magnum_k8s_driver`` to one of
+    supported drivers: vexxhost or azimuth.
