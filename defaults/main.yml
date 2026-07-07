@@ -182,8 +182,8 @@ magnum_cluster_user_trust: true
 magnum_glance_images: []
 
 # Define cluster templates to create. It should be list of
-# dictionaries with keys that are supported by os_coe_cluster_template
-# module (https://docs.ansible.com/ansible/latest/modules/os_coe_cluster_template_module.html)
+# dictionaries with keys that are supported by coe_cluster_template
+# module (https://docs.ansible.com/projects/ansible/latest/collections/openstack/cloud/coe_cluster_template_module.html)
 # magnum_cluster_templates:
 #   - name: k8s
 #     cloud: default
@@ -194,8 +194,8 @@ magnum_glance_images: []
 magnum_cluster_templates: []
 
 # Create extra flavors to be used by magnum cluster template. It should be list
-# of dictionaries with keys that are supported by os_nova_flavor module
-# (https://docs.ansible.com/ansible/latest/modules/os_nova_flavor_module.html)
+# of dictionaries with keys that are supported by compute_flavor module
+# (https://docs.ansible.com/projects/ansible/latest/collections/openstack/cloud/compute_flavor_module.html)
 # magnum_flavors:
 #   - name: k8s-pod
 #     cloud: default
