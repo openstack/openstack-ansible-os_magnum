@@ -71,10 +71,6 @@
   src: https://opendev.org/openstack/openstack-ansible-os_cinder
   scm: git
   version: master
-- name: os_heat
-  src: https://opendev.org/openstack/openstack-ansible-os_heat
-  scm: git
-  version: master
 - name: opendaylight
   scm: git
   src: https://github.com/opendaylight/integration-packaging-ansible-opendaylight

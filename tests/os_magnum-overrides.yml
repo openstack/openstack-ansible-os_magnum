@@ -91,30 +91,6 @@ haproxy_default_services:
         - 172.16.0.0/12
         - 10.0.0.0/8
   - service:
-      haproxy_service_name: heat_api_cfn
-      haproxy_backend_nodes: "{{ groups['heat_api_cfn'] | default([]) }}"
-      haproxy_port: 8000
-      haproxy_ssl: "{{ haproxy_ssl }}"
-      haproxy_balance_type: http
-      haproxy_backend_options:
-        - "httpchk HEAD /"
-  - service:
-      haproxy_service_name: heat_api_cloudwatch
-      haproxy_backend_nodes: "{{ groups['heat_api_cloudwatch'] | default([]) }}"
-      haproxy_port: 8003
-      haproxy_ssl: "{{ haproxy_ssl }}"
-      haproxy_balance_type: http
-      haproxy_backend_options:
-        - "httpchk HEAD /"
-  - service:
-      haproxy_service_name: heat_api
-      haproxy_backend_nodes: "{{ groups['heat_api'] | default([]) }}"
-      haproxy_port: 8004
-      haproxy_ssl: "{{ haproxy_ssl }}"
-      haproxy_balance_type: http
-      haproxy_backend_options:
-        - "httpchk HEAD /"
-  - service:
       haproxy_service_name: keystone_service
       haproxy_backend_nodes: "{{ groups['keystone_all'] | default([])  }}"
       haproxy_port: 5000

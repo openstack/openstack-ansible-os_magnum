@@ -110,32 +110,6 @@ nova_conductor
 nova_console
 nova_scheduler
 
-[heat_all:children]
-heat_api
-heat_engine
-heat_api_cfn
-heat_api_cloudwatch
-heat_engine_container
-heat_apis_container
-
-[heat_api]
-openstack1
-
-[heat_engine]
-openstack1
-
-[heat_api_cfn]
-openstack1
-
-[heat_api_cloudwatch]
-openstack1
-
-[heat_engine_container]
-openstack1
-
-[heat_apis_container]
-openstack1
-
 [cinder_api]
 openstack1
 

@@ -47,9 +47,6 @@
 # Install neutron
 - import_playbook: common/test-install-neutron.yml
 
-# Install heat
-- import_playbook: common/test-install-heat.yml
-
 # Install magnum
 - import_playbook: test-install-magnum.yml
 
