@@ -24,6 +24,7 @@ Design and Configuration
 
    magnum-capi
    post-deployment
+   building-images
 
 Default variables
 ~~~~~~~~~~~~~~~~~

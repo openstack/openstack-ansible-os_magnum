@@ -64,8 +64,8 @@ Vexxhost driver
 Vexxhost driver does use specially prepared Ubuntu image for tenant's cluster
 workers and control plane.
 
-Such image can be built using `diskimage-builder <https://docs.openstack.org/diskimage-builder/>`
-with a custom element Vexxhost provides: `capo-image-elements <https://github.com/vexxhost/capo-image-elements>`.
+Such image can be built using `diskimage-builder <https://docs.openstack.org/diskimage-builder/>`_
+with a custom element Vexxhost provides: `capo-image-elements <https://github.com/vexxhost/capo-image-elements>`_.
 
 Please refer to the ``capo-image-elements`` README file for more details on
 how to build a compatible image.
@@ -106,6 +106,8 @@ But unlike the Vexxhost, image build process is performed by `packer <https://im
 
 You can also use images built by Azimuth Cloud from their `Azimuth image releases <https://github.com/stackhpc/azimuth-images/releases/latest>`_
 You can take URI of the image from the ``manifest.json file``.
+For detailed instructions on building Kubernetes images for the Azimuth driver,
+see :ref:`building-azimuth-images`.
 
 .. note::
 
