@@ -13,6 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Add k8s management cluster CA to the system trust store
+  ansible.builtin.copy:
+    content: >-
+      {{ (k8s_admin_conf_slurp.content | b64decode | from_yaml).clusters[0].cluster['certificate-authority-data'] | b64decode }}
+    dest: "{{ magnum_trust_store_location[ansible_facts['pkg_mgr']] }}kubeadm-capi-mgmt-ca.crt"
+    owner: root
+    group: root
+    mode: '0644'
+  register: _magnum_capi_ca_cert
+
+- name: Refresh the system trust store
+  ansible.builtin.command: "{{ magnum_trust_store_update_command[ansible_facts['pkg_mgr']] }}"
+  when: _magnum_capi_ca_cert is changed
+  changed_when: true
+  notify: Restart magnum services
+
 - name: Pull and deploy helm charts
   ansible.builtin.include_role:
     name: adriacloud.kubernetes.helm_deploy
