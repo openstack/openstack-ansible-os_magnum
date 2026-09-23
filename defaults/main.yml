@@ -215,7 +215,7 @@ magnum_image_path: "{{ lookup('env', 'HOME') }}/openstack-ansible/magnum"
 magnum_image_path_owner: "{{ lookup('env', 'USER') }}"
 
 magnum_pip_packages:
-  - "git+{{ magnum_git_repo }}@{{ magnum_git_install_branch }}#egg=magnum"
+  - "magnum@git+{{ magnum_git_repo }}@{{ magnum_git_install_branch }}"
   - osprofiler
   - PyMySQL
   - pymemcache
